@@ -9,7 +9,7 @@ Log:
 - Johnathan (6/6 - 6/8) - Created buffered menu screen and working GUI. (Menu, Background, Levels, Game)
 - Hubert (6/7) - TileMap class - reading text file into double array
 - Hubert (6/9) - Changed Player mechanics
-
+- Hubert (6/10) - Trying to print sprites based on text map file
 Proposal:
 - A platform style RPG game, similar to Super Meat Boy.
 
