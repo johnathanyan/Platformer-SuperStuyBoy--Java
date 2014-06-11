@@ -41,6 +41,8 @@ public class Player {
 	y += dy; 
     }
 
+    public BufferedImage getArt() { return sprite; }
+    
     public void move(){ // continously call this w/ a thread
 	if(left){
 	    dx = dx - walkingSpeed;

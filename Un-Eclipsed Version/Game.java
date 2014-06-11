@@ -36,69 +36,74 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	BufferedImage playerSprite;
 	try {
 	    playerSprite = ImageIO.read(new File("guy.png"));
-	    Player player = new Player(playerSprite,0,0);
+	    player = new Player(playerSprite,1.0,1.0);
 	}
 	catch(Exception e) {e.printStackTrace();}
-				   }
+    }
 
-	    public void addNotify() {
-	    super.addNotify();
-	    if (thread == null) {
-		thread = new Thread(this);
-		addKeyListener(this);
-		thread.start();
-	    }
-	}
-
-	public void run() {
-	    init();
-	    long startTime;
-	    long elapsedTime;
-	    long waitTime;
-
-	    while(isRunning) {
-
-		startTime = System.nanoTime();
-		update();
-		draw();
-		drawToScreen();
-		elapsedTime = System.nanoTime() - startTime;
-		waitTime = targetTime - elapsedTime / 1000000;
-		try {
-		    if (waitTime < 0)
-			waitTime = 0;
-		    Thread.sleep(waitTime);
-		}
-		catch(Exception e){
-		    e.printStackTrace();
-		}
-	    }
-	}
-
-	private void update(){
-	    manager.update();
-	}
-		
-	private void draw(){
-	    manager.draw(g);
-	    //if (! (manager.getCurrentLevel() instanceof Menu)) 
-		//player.draw(g);
-	}
-		
-	private void drawToScreen(){
-	    Graphics g2 = getGraphics();
-	    g2.drawImage(image, 0, 0, 640, 480, null);
-	    g2.dispose();
-	}
-
-	public void keyTyped(KeyEvent key) {
-	}
-		
-	public void keyPressed(KeyEvent key) {
-	    manager.keyPressed(key.getKeyCode());
-	}
-	public void keyReleased(KeyEvent key) {
-	    manager.keyReleased(key.getKeyCode());
+    public void addNotify() {
+	super.addNotify();
+	if (thread == null) {
+	    thread = new Thread(this);
+	    addKeyListener(this);
+	    thread.start();
 	}
     }
+
+    public void run() {
+	init();
+	long startTime;
+	long elapsedTime;
+	long waitTime;
+
+	while(isRunning) {
+
+	    startTime = System.nanoTime();
+	    update();
+	    draw();
+	    drawToScreen();
+	    elapsedTime = System.nanoTime() - startTime;
+	    waitTime = targetTime - elapsedTime / 1000000;
+	    try {
+		if (waitTime < 0)
+		    waitTime = 0;
+		Thread.sleep(waitTime);
+	    }
+	    catch(Exception e){
+		e.printStackTrace();
+	    }
+	}
+    }
+
+    private void update(){
+	manager.update();
+    }
+		
+    private void draw(){
+	manager.draw(g);
+	if (! (manager.getCurrentLevel() instanceof Menu)) 
+	    player.draw(g);
+    }
+		
+    private void drawToScreen(){
+	Graphics g2 = getGraphics();
+	g2.drawImage(image, 0, 0, 640, 480, null);
+	g2.dispose();
+    }
+
+    public void keyTyped(KeyEvent key) {
+    }
+		
+    public void keyPressed(KeyEvent key) {
+	manager.keyPressed(key.getKeyCode());
+    }
+    public void keyReleased(KeyEvent key) {
+	manager.keyReleased(key.getKeyCode());
+    }
+    public static void main(String[] args) {
+	Game g = new Game();
+	g.init();
+	System.out.println(g.player.getArt());
+    }
+}
     
