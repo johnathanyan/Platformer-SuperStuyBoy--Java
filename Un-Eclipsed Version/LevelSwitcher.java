@@ -8,7 +8,7 @@ public class LevelSwitcher {
 	
     public LevelSwitcher() {
 	levels = new ArrayList<Level>();
-	levels.add(new Menu(this));
+    levels.add(new Menu(this));
 	levels.add(new Level1());
 	currentLevel = MENU;
     }

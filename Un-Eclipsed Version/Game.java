@@ -81,8 +81,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
 		
 	private void draw(){
 	    manager.draw(g);
-	    if (! (manager.getCurrentLevel() instanceof Menu)) 
-		player.draw(g);
+	    //if (! (manager.getCurrentLevel() instanceof Menu)) 
+		//player.draw(g);
 	}
 		
 	private void drawToScreen(){

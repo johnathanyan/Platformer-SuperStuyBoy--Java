@@ -8,7 +8,7 @@ public class Level1 extends Level{
 
     public Level1(){
 	try{
-	    bg = new Background("/Background/black.gif", 1);
+	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
 	    e.printStackTrace();
 	}
