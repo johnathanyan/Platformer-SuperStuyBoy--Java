@@ -32,13 +32,14 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	image = new BufferedImage(WIDTH/2, HEIGHT/2, BufferedImage.TYPE_INT_RGB);
 	g = (Graphics2D) image.getGraphics();
 	isRunning = true;
-	manager = new LevelSwitcher();
 	BufferedImage playerSprite;
 	try {
 	    playerSprite = ImageIO.read(new File("guy.png"));
 	    player = new Player(playerSprite,1.0,1.0);
 	}
 	catch(Exception e) {e.printStackTrace();}
+	manager = new LevelSwitcher(player);
+	System.out.println(manager.getPlayer());
     }
 
     public void addNotify() {
@@ -77,6 +78,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 
     private void update(){
 	manager.update();
+	player.update();
     }
 		
     private void draw(){
@@ -103,7 +105,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
     public static void main(String[] args) {
 	Game g = new Game();
 	g.init();
-	System.out.println(g.player.getArt());
+	LevelSwitcher ls = new LevelSwitcher(g.player);	
+
     }
 }
     

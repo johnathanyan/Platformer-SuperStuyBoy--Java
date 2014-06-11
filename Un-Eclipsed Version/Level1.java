@@ -4,19 +4,22 @@ import java.awt.event.KeyEvent;
 
 public class Level1 extends Level{
     private Background bg;
+    private Player player;
     
-
-    public Level1(){
+    public Level1(Player p){
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
 	    e.printStackTrace();
 	}
+	player = p;
     }
   
     public Background getBackground(){
 	return bg;
     }
+
+    public Player getPlayer() { return player; }
 
     public void init(){}
     public void update(){
@@ -29,7 +32,16 @@ public class Level1 extends Level{
     private void select() {
     }
 
-    public void keyPressed(int k){	
+    public void keyPressed(int k){
+	if (k == KeyEvent.VK_SPACE) 
+	    player.jump();
+	else if (k == KeyEvent.VK_RIGHT) 
+	    player.move(1,0);
+	else if (k == KeyEvent.VK_LEFT) 
+	    player.move(-1,0);
+	else if (k == KeyEvent.VK_UP) 
+	    player.move(0,-1);
+	else { player.move(0,1); } 
     }
 
     public void update(int k){}

@@ -38,13 +38,24 @@ public class Player {
 
     public void update() {
 	x += dx;
-	y += dy; 
+	dx = 0;
+	y += dy;
+	if (isJumping && y < 0) { dy++; }
+	else { 
+	    isJumping = false;
+	    dy = 0;
+	}
     }
 
     public BufferedImage getArt() { return sprite; }
     
-    public void move(){ // continously call this w/ a thread
-	if(left){
+    public void jump() {
+	dy = -10; 
+	isJumping = true;
+    }
+
+    public void move(int x, int y){ // continously call this w/ a thread
+	/*	if(left){
 	    dx = dx - walkingSpeed;
 	    if (dx < (xMax * -1))
 		dx = -1 * xMax;
@@ -68,5 +79,8 @@ public class Player {
 		}
 	    }
 	}
+	}*/
+	dx += x;
+	dy += y;
     }
 }
