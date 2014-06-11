@@ -9,16 +9,18 @@ public class LevelSwitcher {
     public LevelSwitcher() {
 	levels = new ArrayList<Level>();
 	levels.add(new Menu(this));
+	levels.add(new Level1());
 	currentLevel = MENU;
+    }
+    
+    public ArrayList<Level> getLevels(){
+	return levels;
     }
 
     public void setlevel(int level){
 	currentLevel = level;
 	levels.get(currentLevel).init();
     }
-
-    public Level getCurrentLevel() { return levels.get(currentLevel); }
-    
 
     public void update() {
 	levels.get(currentLevel).update();
@@ -31,6 +33,9 @@ public class LevelSwitcher {
     public void keyPressed(int k) {
 	levels.get(currentLevel).keyPressed(k);
     }
+
+    public Level getCurrentLevel() { return levels.get(currentLevel); }
+    
 
     public void keyReleased(int k) {
 	levels.get(currentLevel).keyReleased(k);
