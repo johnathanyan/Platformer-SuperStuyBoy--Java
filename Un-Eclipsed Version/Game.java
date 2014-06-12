@@ -34,7 +34,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	isRunning = true;
 	BufferedImage playerSprite;
 	try {
-	    playerSprite = ImageIO.read(new File("guy.png"));
+	    playerSprite = ImageIO.read(new File("sprite2.gif"));
 	    player = new Player(playerSprite,1.0,1.0);
 	}
 	catch(Exception e) {e.printStackTrace();}
