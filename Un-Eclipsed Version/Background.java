@@ -25,8 +25,8 @@ public class Background{
 	}
 
 	public void setPosition(double x, double y) {
-		this.x = (x * speed) % (game.WIDTH/2);
-		this.y = (y * speed) % (game.HEIGHT/2);
+		this.x = (x * speed) % (game.WIDTH);
+		this.y = (y * speed) % (game.HEIGHT);
 	}
 
 	public void bgVectors(double dx, double dy) {
@@ -42,10 +42,10 @@ public class Background{
 	public void draw(Graphics2D g) {
 		g.drawImage(image, (int)x, (int)y, null);
 		if (x < 0) {
-			g.drawImage(image, (int)x + game.WIDTH/2, (int)y, null); // to make automatically scroll;
+			g.drawImage(image, (int)x + game.WIDTH, (int)y, null); // to make automatically scroll;
 		}
 		if (x > 0) {
-			g.drawImage(image, (int)x - game.WIDTH/2, (int)y, null); // to make automatically scroll;
+			g.drawImage(image, (int)x - game.WIDTH, (int)y, null); // to make automatically scroll;
 		}
 	}
 

@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel implements Runnable, KeyListener{
     // game window size
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 480;
+    public static final int WIDTH = 1024;
+    public static final int HEIGHT = 768;
 
     private Player player; 
     private Thread thread; // allows for multiple actions at a time
@@ -29,12 +29,12 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
 
     private void init() {
-	image = new BufferedImage(WIDTH/2, HEIGHT/2, BufferedImage.TYPE_INT_RGB);
+	image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	g = (Graphics2D) image.getGraphics();
 	isRunning = true;
 	BufferedImage playerSprite;
 	try {
-	    playerSprite = ImageIO.read(new File("sprite2.png"));
+	    playerSprite = ImageIO.read(new File("Mario_Sprite.png"));
 	    player = new Player(playerSprite,1.0,1.0);
 	}
 	catch(Exception e) {e.printStackTrace();}
@@ -89,7 +89,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 		
     private void drawToScreen(){
 	Graphics g2 = getGraphics();
-	g2.drawImage(image, 0, 0, 640, 480, null);
+	g2.drawImage(image, 0, 0, 1024, 768, null);
 	g2.dispose();
     }
 

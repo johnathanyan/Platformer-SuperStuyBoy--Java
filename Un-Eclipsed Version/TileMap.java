@@ -52,6 +52,7 @@ public class TileMap{
 	}
 	for(int i = 0; i < mapHeight; i++){
 	    y += tileSize; //move row when one is done
+	    x = 0;
 	    for(int j = 0; j < mapWidth; j++){
 		if(map[i][j] == 1){
 		    g.drawImage(sprites, x, y, null);

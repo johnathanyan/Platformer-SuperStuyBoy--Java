@@ -8,7 +8,7 @@ public class Level1 extends Level{
     private TileMap tiles;
     
     public Level1(Player p){
-	tiles = new TileMap("test.txt",33);
+	tiles = new TileMap("test.txt",32);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
@@ -39,12 +39,12 @@ public class Level1 extends Level{
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
 	else if (k == KeyEvent.VK_RIGHT) 
-	    player.move(1,0);
+	    player.move(7,0);
 	else if (k == KeyEvent.VK_LEFT) 
-	    player.move(-1,0);
+	    player.move(-7,0);
 	else if (k == KeyEvent.VK_UP) 
-	    player.move(0,-1);
-	else { player.move(0,1); } 
+	    player.move(0,-7);
+	else { player.move(0,7); } 
     }
 
     public void update(int k){}

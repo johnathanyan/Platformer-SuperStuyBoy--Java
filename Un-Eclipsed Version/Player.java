@@ -12,6 +12,8 @@ public class Player {
     private double y;
     private double dx;
     private double dy;
+    private double cx1,cy1,cx2,cy2;
+   
 
     private int health;
 
@@ -30,6 +32,10 @@ public class Player {
 	sprite = art;
 	x = xcor;
 	y = ycor;
+	cx1 = xcor-16;
+	cx2 = xcor+16;
+	cy1 = ycor-16;
+	cy2 = ycor+16;
     }
 
     public void draw(Graphics2D g) {
@@ -38,15 +44,24 @@ public class Player {
 
     public void update() {
 	x += dx;
+	cx1 += dx;
+	cx2 += dx;
 	dx = 0;
 	y += dy;
-	if (isJumping && y < 0) { dy++; }
+	cy1 += dy;
+	cy2 += dy;
+	if (isJumping && y < 600) { dy++; }
 	else { 
 	    isJumping = false;
 	    dy = 0;
 	}
     }
-
+    public double getCx1() { return cx1; }
+    public double getCx2() { return cx2; }
+    public double getCy1() { return cy1; }
+    public double getCy2() { return cy2; }
+    
+    
     public BufferedImage getArt() { return sprite; }
     
     public void jump() {
