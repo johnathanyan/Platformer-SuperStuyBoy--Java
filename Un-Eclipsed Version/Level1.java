@@ -5,8 +5,10 @@ import java.awt.event.KeyEvent;
 public class Level1 extends Level{
     private Background bg;
     private Player player;
+    private TileMap tiles;
     
     public Level1(Player p){
+	tiles = new TileMap("test.txt",33);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
@@ -27,6 +29,7 @@ public class Level1 extends Level{
     }
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
+	tiles.drawTiles("testsprite.png",g);
     }
 
     private void select() {
