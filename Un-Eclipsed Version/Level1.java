@@ -8,7 +8,7 @@ public class Level1 extends Level{
     private TileMap tiles;
     
     public Level1(Player p){
-	tiles = new TileMap("test.txt",32);
+	tiles = new TileMap("test.txt", "spritesheet.png", 32);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
@@ -29,7 +29,7 @@ public class Level1 extends Level{
     }
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
-	tiles.drawTiles("testsprite.png",g);
+	tiles.drawTiles(g);
     }
 
     private void select() {
