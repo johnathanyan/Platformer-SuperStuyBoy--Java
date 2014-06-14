@@ -28,7 +28,7 @@ public class Menu extends Level {
 	    titleColor = new Color(128, 0, 0);
 	    titleFont = new Font("Times New Roman", Font.PLAIN, 32);
 
-	    font = new Font("Arial", Font.PLAIN, 12);
+	    font = new Font("Arial", Font.PLAIN, 24);
 	}
 	catch(Exception e){
 	    e.printStackTrace();
@@ -46,14 +46,15 @@ public class Menu extends Level {
 
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
+	g.setFont(font);
 	for(int i = 0; i < options.length; i++){
 	    if (i == currentChoice) {
-		g.setColor(Color.GRAY);
+		g.setColor(Color.WHITE);
 	    }
 	    else{
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GRAY);
 	    }
-	    g.drawString(options[i], 145, 140+i*15);
+	    g.drawString(options[i], 512, 476+i*32);
 	}
     }
 
@@ -65,7 +66,7 @@ public class Menu extends Level {
 	    
 	}
 	if (currentChoice == 1){ // credits
-	    //
+	    manager.setlevel(2);
 	}
 	if (currentChoice == 2){ // quit
 	    System.exit(0);

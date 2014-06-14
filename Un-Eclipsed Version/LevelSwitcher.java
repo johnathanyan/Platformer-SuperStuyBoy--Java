@@ -12,6 +12,7 @@ public class LevelSwitcher {
 	levels.add(new Menu(this));
 	player = p;
 	levels.add(new Level1(player));
+    levels.add(new Credits(this));
 	currentLevel = MENU;
 	
     }
@@ -37,7 +38,7 @@ public class LevelSwitcher {
 	if (levels.get(currentLevel) instanceof Menu) 
 	    levels.get(currentLevel).keyPressed(k);
 	else 
-	    ((Level1)(levels.get(currentLevel))).keyPressed(k);
+	    (levels.get(currentLevel)).keyPressed(k);
 	 
     }
 
