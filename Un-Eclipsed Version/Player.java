@@ -17,7 +17,7 @@ public class Player {
 
     private int health;
 
-    private boolean isJumping, left, right;
+    private boolean isJumping, canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -43,18 +43,23 @@ public class Player {
     }
 
     public void update() {
-	x += dx;
-	cx1 += dx;
-	cx2 += dx;
+	if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
+	    x += dx;
+	    cx1 += dx;
+	    cx2 += dx;
+	}
 	dx = 0;
-	y += dy;
-	cy1 += dy;
-	cy2 += dy;
+	if (((dy > 0) && canMoveUp) || ((dy < 0) && canMoveDown)) {        
+	    y += dy;
+	    cy1 += dy;
+	    cy2 += dy;
+	}    
 	if (isJumping) { dy++; }
 	else { 
 	    dy = 0;
 	}
     }
+    
     public double getLeft() { return cx1; }
     public double getRight() { return cx2; }
     public double getBotom() { return cy1; }
@@ -67,6 +72,11 @@ public class Player {
 	dy = -10; 
 	isJumping = true;
     }
+
+    public void setMoveRight(boolean b) { canMoveRight = b; }
+    public void setMoveUp(boolean b) { canMoveUp = b; }
+    public void setMoveDown(boolean b) { canMoveDown = b; }
+    public void setMoveLeft(boolean b) { canMoveLeft = b; }
 
     public void move(int x, int y){ // continously call this w/ a thread
 	/*	if(left){
