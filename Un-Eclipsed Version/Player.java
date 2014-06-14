@@ -34,8 +34,8 @@ public class Player {
 	canMoveUp = true;
 	canMoveDown = true; 
 	sprite = art;
-	x = xcor;
-	y = ycor;
+	x = xcor+16;
+	y = ycor+16;
 	cx1 = xcor;
 	cx2 = xcor+32;
 	cy1 = ycor-32;
@@ -63,10 +63,11 @@ public class Player {
 	    dy = 0;
 	}
     }
-    
+    public double getX() { return x; }
+    public double getY() { return y; }
     public double getLeft() { return cx1; }
     public double getRight() { return cx2; }
-    public double getBotom() { return cy1; }
+    public double getBottom() { return cy1; }
     public double getTop() { return cy2; }
     
     

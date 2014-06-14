@@ -8,7 +8,7 @@ public class Level1 extends Level{
     private TileMap tiles;
     
     public Level1(Player p){
-	tiles = new TileMap("test.txt", "spritesheet.png", 32);
+	tiles = new TileMap(p,"test.txt", "spritesheet.png", 32);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
@@ -26,6 +26,7 @@ public class Level1 extends Level{
     public void init(){}
     public void update(){
 	bg.update();
+	tiles.checkCollisions();
     }
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
@@ -44,7 +45,8 @@ public class Level1 extends Level{
 	    player.move(-7,0);
 	else if (k == KeyEvent.VK_UP) 
 	    player.move(0,-7);
-	else { player.move(0,7); } 
+	else if (k == KeyEvent.VK_DOWN) 
+	    player.move(0,7);  
     }
 
     public void update(int k){}
