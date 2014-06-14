@@ -29,6 +29,10 @@ public class Player {
     private double gravity;
 
     public Player(BufferedImage art, double xcor, double ycor) {
+	canMoveRight = true;
+	canMoveLeft = true;
+	canMoveUp = true;
+	canMoveDown = true; 
 	sprite = art;
 	x = xcor;
 	y = ycor;

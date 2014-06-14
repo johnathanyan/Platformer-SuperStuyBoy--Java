@@ -4,6 +4,7 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.File;
 import javax.swing.JPanel;
+import java.util.*;
 
 public class Game extends JPanel implements Runnable, KeyListener{
     // game window size
@@ -11,7 +12,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     public static final int HEIGHT = 768;
 
     private Player player; 
-    private Enemy enemy;
+    private ArrayList<Enemy> enemies;
     private Thread thread; // allows for multiple actions at a time
     private boolean isRunning;
     private int FPS = 60; // frames per second
@@ -30,6 +31,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
 
     private void init() {
+	enemies = new ArrayList<Enemy>();
 	image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	g = (Graphics2D) image.getGraphics();
 	isRunning = true;
@@ -39,7 +41,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    playerSprite = ImageIO.read(new File("char.png"));
 	    player = new Player(playerSprite,1.0,1.0);
 	    enemySprite = ImageIO.read(new File("link.gif"));
-	    enemy = new Enemy(enemySprite,30.0,30.0);
+	    Enemy enemy = new Enemy(enemySprite,30.0,30.0);
+	    enemies.add(enemy);
 	}
 	catch(Exception e) {e.printStackTrace();}
 	manager = new LevelSwitcher(player);
@@ -83,6 +86,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
     private void update(){
 	manager.update();
 	player.update();
+	for (Enemy e : enemies) 
+	    e.update(g);
     }
 		
     private void draw(){

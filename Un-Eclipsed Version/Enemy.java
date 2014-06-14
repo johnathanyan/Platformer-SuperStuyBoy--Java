@@ -50,10 +50,10 @@ public class Enemy {
 
 
     public void draw(Graphics2D g) {
-		g.drawImage(sprites[sprite],(int)x,(int)y,null);
+	g.drawImage(sprites[sprite],(int)x,(int)y,null);
     }
 
-    public void update() {
+    public void update(Graphics2D g) {
 	x += dx;
 	cx1 += dx;
 	cx2 += dx;
@@ -72,6 +72,7 @@ public class Enemy {
 	    isJumping = false;
 	    dy = 0;
 	}
+	this.draw(g);
     }
     public double getCx1() { return cx1; }
     public double getCx2() { return cx2; }
