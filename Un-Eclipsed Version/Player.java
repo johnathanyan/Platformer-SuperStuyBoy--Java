@@ -12,8 +12,9 @@ public class Player {
     private double y;
     private double dx;
     private double dy;
-    private double cx1,cy1,cx2,cy2;
-   
+    private double cx,cy,cx1,cy1,cx2,cy2;
+    //x and y are top left corner, cx,cy are center of sprite
+    //cx1,cx2,cy1,cy2 are midpoints of edges of sprite
 
     private int health;
 
@@ -34,8 +35,10 @@ public class Player {
 	canMoveUp = true;
 	canMoveDown = true; 
 	sprite = art;
-	x = xcor+16;
-	y = ycor+16;
+	x = xcor;
+	y = ycor;
+	cx = xcor + 16;
+	cy = ycor + 16;
 	cx1 = xcor;
 	cx2 = xcor+32;
 	cy1 = ycor-32;
@@ -63,8 +66,8 @@ public class Player {
 	    dy = 0;
 	}
     }
-    public double getX() { return x; }
-    public double getY() { return y; }
+    public double getX() { return cx; }
+    public double getY() { return cy; }
     public double getLeft() { return cx1; }
     public double getRight() { return cx2; }
     public double getBottom() { return cy1; }

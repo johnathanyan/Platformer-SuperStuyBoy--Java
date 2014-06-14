@@ -40,13 +40,13 @@ public class Level1 extends Level{
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
 	else if (k == KeyEvent.VK_RIGHT) 
-	    player.move(7,0);
+	    player.move(32,0);
 	else if (k == KeyEvent.VK_LEFT) 
-	    player.move(-7,0);
+	    player.move(-32,0);
 	else if (k == KeyEvent.VK_UP) 
-	    player.move(0,-7);
+	    player.move(0,-32);
 	else if (k == KeyEvent.VK_DOWN) 
-	    player.move(0,7);  
+	    player.move(0,32);  
     }
 
     public void update(int k){}

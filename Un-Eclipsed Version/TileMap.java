@@ -56,9 +56,7 @@ public class TileMap{
 	int mapY = 0;
 	//Finds current tile of player
 	for (int i = 0; i < tiles.length; i++) {
-	    for (int n = 0; n < tiles[i].length; n++) {
-		System.out.println(i+" "+n);
-		
+	    for (int n = 0; n < tiles[i].length; n++) {		
 		cur = tiles[i][n];
 		if (player.getX() >= cur.getLeft() && player.getX() < cur.getRight() && player.getY() > cur.getBottom()&& player.getY() < cur.getTop() ) { 
 		    mapX = n;
