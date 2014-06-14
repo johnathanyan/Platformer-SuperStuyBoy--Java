@@ -56,7 +56,7 @@ public class Player {
 	    cx2 += dx;
 	}
 	dx = 0;
-	if (((dy > 0) && canMoveUp) || ((dy < 0) && canMoveDown)) {        
+	if (((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)) {        
 	    y += dy;
 	    cy1 += dy;
 	    cy2 += dy;
