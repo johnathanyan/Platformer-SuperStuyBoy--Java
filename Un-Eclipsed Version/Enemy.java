@@ -5,9 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 
-public class Player {
+public class Enemy {
 
-    private BufferedImage sprite;
+    private BufferedImage[] sprites;
+    private int sprite = 0;
     private double x;
     private double y;
     private double dx;
@@ -17,7 +18,7 @@ public class Player {
 
     private int health;
 
-    private boolean isJumping, canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
+    public boolean isJumping, left, right;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -28,55 +29,62 @@ public class Player {
     private double resistance;
     private double gravity;
 
-    public Player(BufferedImage art, double xcor, double ycor) {
-	sprite = art;
+    public Enemy(BufferedImage art, double xcor, double ycor) {
+   	sprites = new BufferedImage[3];
+	divideSheet(art);
 	x = xcor;
 	y = ycor;
-	cx1 = xcor;
-	cx2 = xcor+32;
-	cy1 = ycor-32;
-	cy2 = ycor;
+	cx1 = xcor-16;
+	cx2 = xcor+16;
+	cy1 = ycor-16;
+	cy2 = ycor+16;
     }
 
+    public void divideSheet(BufferedImage sheet){
+	    int count = 0;
+		int tileSize = 32;
+		for (int i = 0; i <3; i++){
+			sprites[i] = sheet.getSubimage(i * tileSize, 0, tileSize, tileSize);
+		}
+	}
+
+
     public void draw(Graphics2D g) {
-	g.drawImage(sprite,(int)x,(int)y,null);
+		g.drawImage(sprites[sprite],(int)x,(int)y,null);
     }
 
     public void update() {
-	if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
-	    x += dx;
-	    cx1 += dx;
-	    cx2 += dx;
-	}
+	x += dx;
+	cx1 += dx;
+	cx2 += dx;
 	dx = 0;
-	if (((dy > 0) && canMoveUp) || ((dy < 0) && canMoveDown)) {        
-	    y += dy;
-	    cy1 += dy;
-	    cy2 += dy;
-	}    
-	if (isJumping) { dy++; }
+	y += dy;
+	cy1 += dy;
+	cy2 += dy;
+	if (left || right){
+		if (sprite >= 2)
+			sprite = 0;
+		else
+			sprite++;
+	}
+	if (isJumping && y < 600) { dy++; }
 	else { 
+	    isJumping = false;
 	    dy = 0;
 	}
     }
+    public double getCx1() { return cx1; }
+    public double getCx2() { return cx2; }
+    public double getCy1() { return cy1; }
+    public double getCy2() { return cy2; }
     
-    public double getLeft() { return cx1; }
-    public double getRight() { return cx2; }
-    public double getBotom() { return cy1; }
-    public double getTop() { return cy2; }
     
-    
-    public BufferedImage getArt() { return sprite; }
+    public BufferedImage getArt() { return sprites[sprite]; }
     
     public void jump() {
 	dy = -10; 
 	isJumping = true;
     }
-
-    public void setMoveRight(boolean b) { canMoveRight = b; }
-    public void setMoveUp(boolean b) { canMoveUp = b; }
-    public void setMoveDown(boolean b) { canMoveDown = b; }
-    public void setMoveLeft(boolean b) { canMoveLeft = b; }
 
     public void move(int x, int y){ // continously call this w/ a thread
 	/*	if(left){

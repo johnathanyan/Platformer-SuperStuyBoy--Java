@@ -11,6 +11,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     public static final int HEIGHT = 768;
 
     private Player player; 
+    private Enemy enemy;
     private Thread thread; // allows for multiple actions at a time
     private boolean isRunning;
     private int FPS = 60; // frames per second
@@ -33,9 +34,12 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	g = (Graphics2D) image.getGraphics();
 	isRunning = true;
 	BufferedImage playerSprite;
+	BufferedImage enemySprite;
 	try {
 	    playerSprite = ImageIO.read(new File("char.png"));
 	    player = new Player(playerSprite,1.0,1.0);
+	    enemySprite = ImageIO.read(new File("link.gif"));
+	    enemy = new Enemy(enemySprite,30.0,30.0);
 	}
 	catch(Exception e) {e.printStackTrace();}
 	manager = new LevelSwitcher(player);
