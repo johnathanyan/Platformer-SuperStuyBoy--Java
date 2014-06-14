@@ -72,7 +72,7 @@ public class Enemy {
 	    isJumping = false;
 	    dy = 0;
 	}
-	this.draw(g);
+        
     }
     public double getCx1() { return cx1; }
     public double getCx2() { return cx2; }

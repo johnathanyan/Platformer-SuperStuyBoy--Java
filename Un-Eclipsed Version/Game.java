@@ -86,14 +86,20 @@ public class Game extends JPanel implements Runnable, KeyListener{
     private void update(){
 	manager.update();
 	player.update();
-	for (Enemy e : enemies) 
-	    e.update(g);
+	for (Enemy e : enemies) { 
+	    e.update(g);	   
+	}
+	
     }
 		
     private void draw(){
 	manager.draw(g);
-	if (! (manager.getCurrentLevel() instanceof Menu)) 
+	if (! (manager.getCurrentLevel() instanceof Menu)) {
 	    player.draw(g);
+	    for (Enemy e : enemies) {
+		e.draw(g);
+	    }
+	}
     }
 		
     private void drawToScreen(){
