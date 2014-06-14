@@ -51,6 +51,7 @@ public class Player {
 	boolean colliding = false; 
 	if ((Math.abs(cx-t.getX()) < 32)&&(Math.abs(cy-t.getY()) < 32))
 	    colliding = true;
+	//System.out.println(cx-t.getX() + " " + (cy-t.getY()));
 	//System.out.println(colliding);
 	return colliding;
     }
@@ -58,7 +59,12 @@ public class Player {
     public void fixCollisions(ArrayList<Tile> tiles) {
 	for (Tile t : tiles) {
 	    if (cy-t.getY() > 0) { isJumping = false; }
-	    move(cx-t.getX(),cy-t.getY());
+	    String dir;
+	    if (cx < t.getX()) { move((t.getX()-16)-cx,0); }
+	    else if (cx > t.getX()) { move(cx-(t.getX()+16),0); }
+	    else if (cy > t.getY()) { move(0,cy-(t.getY()+16)); }
+	    else { move(0,(t.getY()-16)-cy); }
+	  
 	}
     }
     
@@ -69,12 +75,14 @@ public class Player {
     public void update() {
 	//if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
 	x += dx;
+	cx += dx;
 	cx1 += dx;
 	cx2 += dx;
 	//}
 	dx = 0;
 	//if (((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)) {        
 	y += dy;
+	cy += dy;
 	cy1 += dy;
 	cy2 += dy;
 	//}

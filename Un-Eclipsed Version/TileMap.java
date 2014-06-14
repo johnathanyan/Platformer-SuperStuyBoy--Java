@@ -52,9 +52,12 @@ public class TileMap{
 
     public ArrayList<Tile> getCollisions() {
 	ArrayList<Tile> ret = new ArrayList<Tile>();
+	/*System.out.println(tiles[0][0]);
+	System.out.println(player.getX());
+	System.out.println(player.getY());*/
 	for (int i = 0; i < tiles.length; i++) {
 	    for (int n = 0; n < tiles[i].length; n++) {
-		System.out.println(tiles[i][n]);
+		//System.out.println(tiles[i][n]);
 		if (player.checkCollision(tiles[i][n]) && tiles[i][n].isSolid()) {
 		    //System.out.println(player.checkCollision(tiles[i][n]));
 		    ret.add(tiles[i][n]);
