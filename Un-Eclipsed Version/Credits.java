@@ -39,8 +39,6 @@ public class Credits extends Level {
 
     private void select() {
 	    manager.setlevel(0);
-	    //manager.update();
-	    //manager.getLevels().get(1).getBackground();
     }
 
     public void keyPressed(int k){
