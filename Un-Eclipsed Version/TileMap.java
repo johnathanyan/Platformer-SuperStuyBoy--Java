@@ -57,8 +57,10 @@ public class TileMap{
 	//Finds current tile of player
 	for (int i = 0; i < tiles.length; i++) {
 	    for (int n = 0; n < tiles[i].length; n++) {
-		cur = tiles[i][n];				   
-		if (player.getX() >= cur.getLeft() && player.getX() < cur.getRight() && player.getY() > cur.getBottom() && player.getY() < cur.getTop()) { 
+		System.out.println(i+" "+n);
+		
+		cur = tiles[i][n];
+		if (player.getX() >= cur.getLeft() && player.getX() < cur.getRight() && player.getY() > cur.getBottom()&& player.getY() < cur.getTop() ) { 
 		    mapX = n;
 		    mapY = i;
 		    break;
@@ -69,6 +71,7 @@ public class TileMap{
 	Tile left;
 	Tile top;
 	Tile bottom;
+	
 	//Sets the four directional tiles
 	if (mapX!=map[0].length-1)
 	    right = tiles[mapX+1][mapY];
@@ -82,10 +85,12 @@ public class TileMap{
 	    top = tiles[mapX][mapY+1];
 	else
 	    top = null;
+	System.out.println(mapX + " " + (mapY-1));
 	if (mapY!=map.length-1)
-	    bottom = tiles[mapX][mapY-1];
+	    bottom = tiles[mapX][mapY+1];
 	else 
 	    bottom = null;
+	
 	//Sets player booleans
 	if (right!=null && player.getRight() >= right.getLeft()-1 && right.isSolid()) 
 	    player.setMoveRight(false);

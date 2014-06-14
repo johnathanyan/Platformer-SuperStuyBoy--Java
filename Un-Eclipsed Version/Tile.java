@@ -16,7 +16,7 @@ public class Tile{
 	left = (double)x;
 	right =(double)(x + 32);
 	top = (double)y;
-	bot = (double)(y - 32);
+	bot = (double)(y + 32);
 	sprite = s;
     }
 
