@@ -46,7 +46,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	}
 	catch(Exception e) {e.printStackTrace();}
 	manager = new LevelSwitcher(player,g);
-	System.out.println(manager.getPlayer());
+	//System.out.println(manager.getPlayer());
     }
 
     public void addNotify() {
@@ -65,7 +65,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	long waitTime;
 
 	while(isRunning) {
-
+	    
 	    startTime = System.nanoTime();
 	    draw();
 	    update();

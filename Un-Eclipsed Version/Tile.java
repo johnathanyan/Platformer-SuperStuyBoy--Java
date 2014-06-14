@@ -20,5 +20,7 @@ public class Tile{
     public double getX() { return cx; }
     public double getY() { return cy; }
     public boolean isSolid() { return type; }
-
+    public String toString() {
+	return "" + cx + " " + cy;
+    }
 }

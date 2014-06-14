@@ -28,7 +28,8 @@ public class Level1 extends Level{
     public Player getPlayer() { return player; }
 
     public void init(){
-	tiles.drawTiles(g);}
+	tiles.drawTiles(g);
+    }
     public void update(){
 	bg.update();
 	player.fixCollisions(tiles.getCollisions());

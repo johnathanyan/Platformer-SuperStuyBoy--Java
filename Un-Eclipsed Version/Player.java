@@ -51,12 +51,15 @@ public class Player {
 	boolean colliding = false; 
 	if ((Math.abs(cx-t.getX()) < 32)&&(Math.abs(cy-t.getY()) < 32))
 	    colliding = true;
+	//System.out.println(colliding);
 	return colliding;
     }
     
     public void fixCollisions(ArrayList<Tile> tiles) {
-	for (Tile t : tiles)     
+	for (Tile t : tiles) {
+	    if (cy-t.getY() > 0) { isJumping = false; }
 	    move(cx-t.getX(),cy-t.getY());
+	}
     }
     
     public void draw(Graphics2D g) {
@@ -75,7 +78,6 @@ public class Player {
 	cy1 += dy;
 	cy2 += dy;
 	//}
-	if (dy == 0) { isJumping = false; }
 	if (isJumping) { dy++; }
 	else { 
 	    dy = 0;
