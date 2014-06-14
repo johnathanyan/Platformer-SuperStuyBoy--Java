@@ -32,10 +32,10 @@ public class Player {
 	sprite = art;
 	x = xcor;
 	y = ycor;
-	cx1 = xcor-16;
-	cx2 = xcor+16;
-	cy1 = ycor-16;
-	cy2 = ycor+16;
+	cx1 = xcor
+	cx2 = xcor+32;
+	cy1 = ycor-32;
+	cy2 = ycor;
     }
 
     public void draw(Graphics2D g) {
@@ -50,16 +50,15 @@ public class Player {
 	y += dy;
 	cy1 += dy;
 	cy2 += dy;
-	if (isJumping && y < 600) { dy++; }
+	if (isJumping) { dy++; }
 	else { 
-	    isJumping = false;
 	    dy = 0;
 	}
     }
-    public double getCx1() { return cx1; }
-    public double getCx2() { return cx2; }
-    public double getCy1() { return cy1; }
-    public double getCy2() { return cy2; }
+    public double getLeft() { return cx1; }
+    public double getRight() { return cx2; }
+    public double getBotom() { return cy1; }
+    public double getTop() { return cy2; }
     
     
     public BufferedImage getArt() { return sprite; }
