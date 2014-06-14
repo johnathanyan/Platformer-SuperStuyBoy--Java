@@ -45,7 +45,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    enemies.add(enemy);
 	}
 	catch(Exception e) {e.printStackTrace();}
-	manager = new LevelSwitcher(player);
+	manager = new LevelSwitcher(player,g);
 	System.out.println(manager.getPlayer());
     }
 
@@ -118,9 +118,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	manager.keyReleased(key.getKeyCode());
     }
     public static void main(String[] args) {
-	Game g = new Game();
-	g.init();
-	LevelSwitcher ls = new LevelSwitcher(g.player);	
+
 
     }
 }

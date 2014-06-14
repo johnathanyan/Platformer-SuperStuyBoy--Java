@@ -6,25 +6,19 @@ import javax.imageio.*;
 
 public class Tile{
     private boolean type = false;
-    private double left, right;
-    private double bot, top;
-    private double x, y, size;
+    private double cx, cy, size;
     private BufferedImage sprite;
 
     public Tile(int x, int y, int size, BufferedImage s, boolean t){
 	type = t;
-	left = (double)x;
-	right =(double)(x + 32);
-	top = (double)y;
-	bot = (double)(y + 32);
+	cx = (double)(x+16);
+	cy = (double)(y+16);
 	sprite = s;
     }
-
     
-    public double getTop(){ return top;}
-    public double getBottom(){ return bot;}
-    public double getLeft(){ return left;}
-    public double getRight(){ return right;}
+
+    public double getX() { return cx; }
+    public double getY() { return cy; }
     public boolean isSolid() { return type; }
 
 }

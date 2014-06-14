@@ -4,6 +4,8 @@ import java.io.File;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
+import java.util.*;
+import java.lang.Math;
 
 public class Player {
 
@@ -41,26 +43,39 @@ public class Player {
 	cy = ycor + 16;
 	cx1 = xcor;
 	cx2 = xcor+32;
-	cy1 = ycor-32;
+	cy1 = ycor+32;
 	cy2 = ycor;
     }
-
+    
+    public boolean checkCollision(Tile t) {
+	boolean colliding = false; 
+	if ((Math.abs(cx-t.getX()) < 32)&&(Math.abs(cy-t.getY()) < 32))
+	    colliding = true;
+	return colliding;
+    }
+    
+    public void fixCollisions(ArrayList<Tile> tiles) {
+	for (Tile t : tiles)     
+	    move(cx-t.getX(),cy-t.getY());
+    }
+    
     public void draw(Graphics2D g) {
 	g.drawImage(sprite,(int)x,(int)y,null);
     }
 
     public void update() {
-	if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
-	    x += dx;
-	    cx1 += dx;
-	    cx2 += dx;
-	}
+	//if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
+	x += dx;
+	cx1 += dx;
+	cx2 += dx;
+	//}
 	dx = 0;
-	if (((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)) {        
-	    y += dy;
-	    cy1 += dy;
-	    cy2 += dy;
-	}    
+	//if (((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)) {        
+	y += dy;
+	cy1 += dy;
+	cy2 += dy;
+	//}
+	if (dy == 0) { isJumping = false; }
 	if (isJumping) { dy++; }
 	else { 
 	    dy = 0;
@@ -86,7 +101,7 @@ public class Player {
     public void setMoveDown(boolean b) { canMoveDown = b; }
     public void setMoveLeft(boolean b) { canMoveLeft = b; }
 
-    public void move(int x, int y){ // continously call this w/ a thread
+    public void move(double x, double y){ // continously call this w/ a thread
 	/*	if(left){
 	    dx = dx - walkingSpeed;
 	    if (dx < (xMax * -1))

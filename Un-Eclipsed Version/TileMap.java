@@ -50,11 +50,25 @@ public class TileMap{
 	divideSheet(spriteSheet);
     }
 
-    public void checkCollisions() {
+    public ArrayList<Tile> getCollisions() {
+	ArrayList<Tile> ret = new ArrayList<Tile>();
+	for (int i = 0; i < tiles.length; i++) {
+	    for (int n = 0; n < tiles[i].length; n++) {
+		if (player.checkCollision(tiles[i][n])) {
+		    ret.add(tiles[i][n]);
+		}
+	    }
+	}
+	return ret;
+    }
+
+    /*public void checkCollisions() {
 	Tile cur;
 	int mapX = 0;
 	int mapY = 0;
 	//Finds current tile of player
+	//System.out.println(player.getX());
+	//System.out.println(player.getY());
 	for (int i = 0; i < tiles.length; i++) {
 	    for (int n = 0; n < tiles[i].length; n++) {		
 		cur = tiles[i][n];
@@ -63,16 +77,18 @@ public class TileMap{
 		System.out.println(cur.getRight());
 		System.out.println(cur.getTop());
 		System.out.println(cur.getBottom());
-		System.out.println(cur.getLeft());*/
+		System.out.println(cur.getLeft());
 		if (player.getX() >= cur.getLeft() && player.getX() < cur.getRight() && player.getY() > cur.getBottom()&& player.getY() < cur.getTop() ) { 
+		    /*System.out.println(player.getX());
+		    System.out.println(player.getY());
+		    System.out.println(cur.getLeft());
+		    System.out.println(cur.getRight());
 		    mapX = n;
 		    mapY = i;
 		    break;
 		}
 	    }
 	}
-	System.out.println(mapX);
-	System.out.println(mapY);
 	Tile right;
 	Tile left;
 	Tile top;
@@ -95,7 +111,6 @@ public class TileMap{
 	    top = tiles[mapX][mapY+1];
 	else
 	    top = null;
-	System.out.println(mapX + " " + (mapY-1));
 	if (mapY!=map.length-1)
 	    bottom = tiles[mapX][mapY+1];
 	else 
@@ -119,6 +134,7 @@ public class TileMap{
 	else 
 	    player.setMoveDown(true);
     }
+*/
 	
     //splits up sheet into smaller images to be used for tiles/entities
     public void divideSheet(BufferedImage sheet){
