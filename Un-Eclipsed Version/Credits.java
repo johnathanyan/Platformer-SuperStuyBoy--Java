@@ -12,7 +12,7 @@ public class Credits extends Level {
 
 	try{
 	    bg = new Background("/Backgrounds/credit.gif", 1);
-	    bg.bgVectors(0, -1.5);
+	    bg.bgVectors(0, -.75);
 
 	    font = new Font("Arial", Font.PLAIN, 24);
 	}
