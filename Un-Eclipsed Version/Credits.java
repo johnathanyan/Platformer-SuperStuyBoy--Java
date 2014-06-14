@@ -38,6 +38,7 @@ public class Credits extends Level {
     }
 
     private void select() {
+    	bg.setPosition(0,0);
 	    manager.setlevel(0);
     }
 
