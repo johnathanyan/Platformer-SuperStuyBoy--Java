@@ -9,6 +9,7 @@ public class Level1 extends Level{
     private Player player;
     private TileMap tiles;
     private Graphics2D g;
+    private Enemy enemy;
     
     public Level1(Player p,Graphics2D graphics){
 	g = graphics;
@@ -46,10 +47,17 @@ public class Level1 extends Level{
     public void keyPressed(int k){
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
-	else if (k == KeyEvent.VK_RIGHT) 
-	    player.move(3,0);
+	else if (k == KeyEvent.VK_RIGHT){
+	    player.move(32,0);
+	    if (enemy.right != true){
+	    	enemy.start = System.nanoTime();
+	    }
+	    enemy.right = true;
+	    enemy.move(3,0);
+	}
 	else if (k == KeyEvent.VK_LEFT) 
 	    player.move(-3,0);
+
 	else if (k == KeyEvent.VK_UP) 
 	    player.move(0,-3);
 	else if (k == KeyEvent.VK_DOWN) 
@@ -59,6 +67,10 @@ public class Level1 extends Level{
     public void update(int k){}
 
     public void keyReleased(int k) {
-    };
+    	if (k == KeyEvent.VK_RIGHT){ 
+	    enemy.right = false;
+	    enemy.start = System.nanoTime();
+    	}
+	}
 
 }

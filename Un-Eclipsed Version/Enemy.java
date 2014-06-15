@@ -15,10 +15,12 @@ public class Enemy {
     private double dy;
     private double cx1,cy1,cx2,cy2;
    
+    public static long start;
+    public static long delay;
 
     private int health;
 
-    public boolean isJumping, left, right;
+    public static boolean isJumping, left, right;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -30,7 +32,7 @@ public class Enemy {
     private double gravity;
 
     public Enemy(BufferedImage art, double xcor, double ycor) {
-   	sprites = new BufferedImage[3];
+   	sprites = new BufferedImage[4];
 	divideSheet(art);
 	x = xcor;
 	y = ycor;
@@ -46,6 +48,7 @@ public class Enemy {
 		for (int i = 0; i <3; i++){
 			sprites[i] = sheet.getSubimage(i * tileSize, 0, tileSize, tileSize);
 		}
+		sprites[3] = sheet.getSubimage((1 * tileSize), 0, tileSize, tileSize);
 	}
 
 
@@ -54,6 +57,7 @@ public class Enemy {
     }
 
     public void update(Graphics2D g) {
+   	long elapsed = (System.nanoTime() - start) / 1000000;
 	x += dx;
 	cx1 += dx;
 	cx2 += dx;
@@ -62,10 +66,22 @@ public class Enemy {
 	cy1 += dy;
 	cy2 += dy;
 	if (left || right){
-		if (sprite >= 2)
+		if (sprite >= 3){
+			if (elapsed > 85){
+				sprite = 0;
+				start = System.nanoTime();
+			}
+		}
+		else{
+			if (elapsed > 85){
+				sprite++;
+				start = System.nanoTime();
+			}
+		}
+	}
+	if (!left && !right){
+		if (elapsed > 130)
 			sprite = 0;
-		else
-			sprite++;
 	}
 	if (isJumping && y < 600) { dy++; }
 	else { 
