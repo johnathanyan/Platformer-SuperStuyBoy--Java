@@ -4,6 +4,8 @@ import java.io.File;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
+import java.util.*;
+import java.lang.Math;
 
 public class Enemy {
 
@@ -13,14 +15,14 @@ public class Enemy {
     private double y;
     private double dx;
     private double dy;
-    private double cx1,cy1,cx2,cy2;
+    private double cx,cy,cx1,cy1,cx2,cy2;
    
     public static long start;
     public static long delay;
 
     private int health;
 
-    public static boolean isJumping, left, right;
+    public static boolean isJumping, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -32,14 +34,41 @@ public class Enemy {
     private double gravity;
 
     public Enemy(BufferedImage art, double xcor, double ycor) {
+    canMoveRight = true;
+	canMoveLeft = true;
+	canMoveUp = true;
+	canMoveDown = true; 
    	sprites = new BufferedImage[4];
 	divideSheet(art);
 	x = xcor;
 	y = ycor;
-	cx1 = xcor-16;
-	cx2 = xcor+16;
-	cy1 = ycor-16;
-	cy2 = ycor+16;
+	cx = xcor + 16;
+	cy = ycor + 16;
+	cx1 = xcor;
+	cx2 = xcor+32;
+	cy1 = ycor+32;
+	cy2 = ycor;
+    }
+
+    public boolean checkCollision(Tile t) {
+	boolean colliding = false; 
+	if ((Math.abs(cx-t.getX()) < 32)&&(Math.abs(cy-t.getY()) < 32))
+	    colliding = true;
+	//System.out.println(cx-t.getX() + " " + (cy-t.getY()));
+	//System.out.println(colliding);
+	return colliding;
+    }
+    
+    public void fixCollisions(ArrayList<Tile> tiles) {
+		for (Tile t : tiles) {
+		    if (cy-t.getY() > 0) { isJumping = false; }
+		    String dir;
+		    if (cx < t.getX()) { move((t.getX()-16)-cx,0); }
+		    else if (cx > t.getX()) { move(cx-(t.getX()+16),0); }
+		    else if (cy > t.getY()) { move(0,cy-(t.getY()+16)); }
+		    else { move(0,(t.getY()-16)-cy); }
+		  
+		}
     }
 
     public void divideSheet(BufferedImage sheet){
@@ -53,7 +82,7 @@ public class Enemy {
 
 
     public void draw(Graphics2D g) {
-	g.drawImage(sprites[sprite],(int)x,(int)y,null);
+		g.drawImage(sprites[sprite],(int)x,(int)y,null);
     }
 
     public void update(Graphics2D g) {
@@ -90,20 +119,27 @@ public class Enemy {
 	}
         
     }
-    public double getCx1() { return cx1; }
-    public double getCx2() { return cx2; }
-    public double getCy1() { return cy1; }
-    public double getCy2() { return cy2; }
+
+    public double getX() { return cx; }
+    public double getY() { return cy; }
+    public double getLeft() { return cx1; }
+    public double getRight() { return cx2; }
+    public double getBottom() { return cy1; }
+    public double getTop() { return cy2; }
     
     
     public BufferedImage getArt() { return sprites[sprite]; }
     
-    public void jump() {
+    public void jump(){
 	dy = -10; 
 	isJumping = true;
     }
 
-    public void move(int x, int y){ // continously call this w/ a thread
+    public void setMoveRight(boolean b) { canMoveRight = b; }
+    public void setMoveUp(boolean b) { canMoveUp = b; }
+    public void setMoveDown(boolean b) { canMoveDown = b; }
+    public void setMoveLeft(boolean b) { canMoveLeft = b; }
+    public void move(double x, double y){ // continously call this w/ a thread
 	/*	if(left){
 	    dx = dx - walkingSpeed;
 	    if (dx < (xMax * -1))

@@ -12,6 +12,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     public static final int HEIGHT = 768;
 
     private Player player; 
+    private Enemy enemy;
     private ArrayList<Enemy> enemies;
     private Thread thread; // allows for multiple actions at a time
     private boolean isRunning;
@@ -41,11 +42,11 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    playerSprite = ImageIO.read(new File("char.png"));
 	    player = new Player(playerSprite,32.0,0.0);
 	    enemySprite = ImageIO.read(new File("link.gif"));
-	    Enemy enemy = new Enemy(enemySprite,30.0,30.0);
+	    enemy = new Enemy(enemySprite,30.0,30.0);
 	    enemies.add(enemy);
 	}
 	catch(Exception e) {e.printStackTrace();}
-	manager = new LevelSwitcher(player,g);
+	manager = new LevelSwitcher(player, enemy, g);
 	//System.out.println(manager.getPlayer());
     }
 

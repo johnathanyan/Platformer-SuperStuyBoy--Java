@@ -4,18 +4,20 @@ import java.awt.*;
 public class LevelSwitcher {
     private ArrayList<Level> levels;
     private Player player;
+    private Enemy enemy;    
     private int currentLevel;
     private Graphics2D g;
     public static final int MENU = 0;
     public static final int LEVEL1 = 1;
     
 	
-    public LevelSwitcher(Player p, Graphics2D graphics) {
+    public LevelSwitcher(Player p, Enemy _e, Graphics2D graphics) {
 	g = graphics;
 	levels = new ArrayList<Level>();
 	levels.add(new Menu(this));
 	player = p;
-	levels.add(new Level1(player,g));
+    enemy = _e;
+	levels.add(new Level1(player, enemy, g));
     levels.add(new Credits(this));
 	currentLevel = MENU;
 	

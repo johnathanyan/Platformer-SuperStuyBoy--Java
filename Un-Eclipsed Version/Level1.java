@@ -11,7 +11,7 @@ public class Level1 extends Level{
     private Graphics2D g;
     private Enemy enemy;
     
-    public Level1(Player p,Graphics2D graphics){
+    public Level1(Player p, Enemy _e, Graphics2D graphics){
 	g = graphics;
 	tiles = new TileMap(p,"test.txt", "spritesheet.png", 32);
 	try{
@@ -20,6 +20,7 @@ public class Level1 extends Level{
 	    e.printStackTrace();
 	}
 	player = p;
+	enemy = _e;
     }
   
     public Background getBackground(){
@@ -48,21 +49,26 @@ public class Level1 extends Level{
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
 	else if (k == KeyEvent.VK_RIGHT){
-	    player.move(32,0);
+	    player.move(3,0);
 	    if (enemy.right != true){
 	    	enemy.start = System.nanoTime();
 	    }
 	    enemy.right = true;
 	    enemy.move(3,0);
 	}
-	else if (k == KeyEvent.VK_LEFT) 
+	else if (k == KeyEvent.VK_LEFT) {
 	    player.move(-3,0);
-
-	else if (k == KeyEvent.VK_UP) 
+	    enemy.move(-3,0);
+	} 
+	else if (k == KeyEvent.VK_UP) {
 	    player.move(0,-3);
-	else if (k == KeyEvent.VK_DOWN) 
+	    enemy.move(0,-3);
+	}
+	else if (k == KeyEvent.VK_DOWN) {
 	    player.move(0,3);  
-    }
+	    enemy.move(0,3);
+ 	   }
+	}
 
     public void update(int k){}
 
