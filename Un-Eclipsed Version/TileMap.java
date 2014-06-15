@@ -50,76 +50,24 @@ public class TileMap{
 	divideSheet(spriteSheet);
     }
 
-    public void checkCollisions() {
-	Tile cur;
-	int mapX = 0;
-	int mapY = 0;
-	//Finds current tile of player
+    public ArrayList<Tile> getCollisions() {
+	ArrayList<Tile> ret = new ArrayList<Tile>();
+	/*System.out.println(tiles[0][0]);
+	  System.out.println(player.getX());
+	  System.out.println(player.getY());*/
 	for (int i = 0; i < tiles.length; i++) {
-	    for (int n = 0; n < tiles[i].length; n++) {		
-		cur = tiles[i][n];
-		/*	System.out.println(player.getX());
-		System.out.println(player.getY());
-		System.out.println(cur.getRight());
-		System.out.println(cur.getTop());
-		System.out.println(cur.getBottom());
-		System.out.println(cur.getLeft());*/
-		if (player.getX() >= cur.getLeft() && player.getX() < cur.getRight() && player.getY() > cur.getBottom()&& player.getY() < cur.getTop() ) { 
-		    mapX = n;
-		    mapY = i;
-		    break;
+	    for (int n = 0; n < tiles[i].length; n++) {
+		//System.out.println(tiles[i][n]);
+		if (player.checkCollision(tiles[i][n]) && tiles[i][n].isSolid()) {
+		    //System.out.println(player.checkCollision(tiles[i][n]));
+		    ret.add(tiles[i][n]);
 		}
 	    }
 	}
-	System.out.println(mapX);
-	System.out.println(mapY);
-	Tile right;
-	Tile left;
-	Tile top;
-	Tile bottom;
-	
-	//Sets the four directional tiles
-	if (mapX!=map[0].length-1) {
-	    right = tiles[mapX+1][mapY];
-	    //System.out.println(right.isSolid());
-	}
-	else
-	    right = null;
-	if (mapX!=0) {
-	    left = tiles[mapX-1][mapY];
-	    //System.out.println(left.isSolid());
-	}
-	    else
-	    left = null;
-	if (mapY!=0)
-	    top = tiles[mapX][mapY+1];
-	else
-	    top = null;
-	System.out.println(mapX + " " + (mapY-1));
-	if (mapY!=map.length-1)
-	    bottom = tiles[mapX][mapY+1];
-	else 
-	    bottom = null;
-	
-	//Sets player booleans
-	if (right!=null && player.getRight() >= right.getLeft()-1 && right.isSolid()) 
-	    player.setMoveRight(false);
-	else 
-	    player.setMoveRight(true);
-	if (left != null && player.getLeft() <= left.getRight()+1 && left.isSolid()) 
-	    player.setMoveLeft(false);
-	else 
-	    player.setMoveLeft(true);
-	if (top != null && player.getTop() >= top.getBottom()-1 && top.isSolid() )
-	    player.setMoveUp(false);
-	else 
-	    player.setMoveUp(true);
-	if (bottom != null && player.getBottom() <= bottom.getTop()+1 && bottom.isSolid()) 
-	    player.setMoveDown(false);
-	else 
-	    player.setMoveDown(true);
+	//System.out.println(ret);
+	return ret;
     }
-	
+
     //splits up sheet into smaller images to be used for tiles/entities
     public void divideSheet(BufferedImage sheet){
 	int count = 0;
@@ -127,7 +75,7 @@ public class TileMap{
 	int h = sheet.getHeight();
 	for(int m = 0; m < (w - tileSize); m += tileSize + 1){
 	    for(int n = 0; n < (h - tileSize); n += tileSize + 1){
-		System.out.println(m + ", " + n);
+		//System.out.println(m + ", " + n);
 		sprites[count] = sheet.getSubimage(m, n, tileSize, tileSize);
 		count++;
 	    }
@@ -173,7 +121,7 @@ public class TileMap{
 		}
 		else if(type == 5){
 		    g.drawImage(sprites[7], x, y, null);
-		    sprite = 5;
+		    sprite = 7;
 		    solid = false;
 		}
 		tiles[i][j] = new Tile(x, y, tileSize, sprites[sprite],solid);
@@ -186,5 +134,7 @@ public class TileMap{
     public int[][] getMap(){
 	return map;
     }
+    public static void main(String[] args) {
 
+    }
 }
