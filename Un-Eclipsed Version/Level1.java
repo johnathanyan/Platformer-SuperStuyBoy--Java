@@ -40,8 +40,7 @@ public class Level1 extends Level{
     if (transition = true)
     	transition();
 	bg.update();
-	player.fixCollisions(tiles.getCollisions());
-	//tiles.checkCollisions();
+        tiles.collider();
     }
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);

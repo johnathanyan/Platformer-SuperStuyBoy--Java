@@ -20,7 +20,7 @@ public class Player {
 
     private int health;
 
-    private boolean isJumping, canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
+    private static boolean isJumping, canMoveLeft, canMoveRight, canMoveUp, canMoveDown;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -80,19 +80,25 @@ public class Player {
 	cx2 += dx;
 	//}
 	dx = 0;
-	//if (((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)) {        
-	y += dy;
-	cy += dy;
-	cy1 += dy;
-	cy2 += dy;
-	//}
+        if(canMoveDown){        
+	    y += dy;
+	    cy += dy;
+	    cy1 += dy;
+	    cy2 += dy;
+	    //}
+	}else{
+	    dy = 0;
+	}
 	if (isJumping) { dy++; }
 	else { 
 	    dy = 0;
 	}
     }
-    public double getX() { return cx; }
-    public double getY() { return cy; }
+    
+    public double getX() {return x;}
+    public double getY() { return y;}
+    public double getCX() { return cx; }
+    public double getCY() { return cy; }
     public double getLeft() { return cx1; }
     public double getRight() { return cx2; }
     public double getBottom() { return cy1; }

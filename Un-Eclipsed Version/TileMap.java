@@ -14,6 +14,9 @@ public class TileMap{
     private Scanner sc;
     private File file;
     private Player player; 
+    private int px, py;
+    private int[][] pixelated;
+    private PrintWriter out;
 
     //reads file of ints to determine which sprites to use
     public TileMap(Player p, String path, String sheetPath, int tileSize){
@@ -32,6 +35,8 @@ public class TileMap{
 	map = new int[mapHeight][mapWidth];
 	tiles = new Tile[mapHeight][mapWidth];
 	sprites = new BufferedImage[mapHeight * mapWidth];
+	pixelated = new int[mapHeight *32][mapWidth * 32];
+	//	System.out.println(Arrays.deepToString(pixelate));
 
 	String toSplit = "\\s+";
 	for(int i = 0; i < mapHeight; i++){
@@ -43,6 +48,17 @@ public class TileMap{
 	}
 
 	try{
+	    out = new PrintWriter(new BufferedWriter(new FileWriter("out.txt")));
+	}catch(Exception e){
+	    e.printStackTrace();
+	}
+
+	Pixelator work = new Pixelator(tileSize, map);
+	pixelated = work.work();
+	out.print(Arrays.deepToString(pixelated));
+	out.close();
+
+	try{
 	    spriteSheet = ImageIO.read(new File(sheetPath));
 	}catch(Exception e){
 	    e.printStackTrace();
@@ -50,22 +66,17 @@ public class TileMap{
 	divideSheet(spriteSheet);
     }
 
-    public ArrayList<Tile> getCollisions() {
-	ArrayList<Tile> ret = new ArrayList<Tile>();
-	/*System.out.println(tiles[0][0]);
-	  System.out.println(player.getX());
-	  System.out.println(player.getY());*/
-	for (int i = 0; i < tiles.length; i++) {
-	    for (int n = 0; n < tiles[i].length; n++) {
-		//System.out.println(tiles[i][n]);
-		if (player.checkCollision(tiles[i][n]) && tiles[i][n].isSolid()) {
-		    //System.out.println(player.checkCollision(tiles[i][n]));
-		    ret.add(tiles[i][n]);
-		}
-	    }
+    public void collider(){
+        //bot left corner
+	double botleftx = player.getX();
+	double botlefty = player.getY() + 32;
+	System.out.println(pixelated[(int)botlefty][(int)botleftx]);
+	System.out.println(botleftx + " " + botlefty);
+	if(pixelated[(int)botlefty][(int)botleftx] == 1){
+	    player.setMoveDown(false);
+	    System.out.println("Collision: " + botleftx + " " + 
+			       botlefty);
 	}
-	//System.out.println(ret);
-	return ret;
     }
 
     //splits up sheet into smaller images to be used for tiles/entities
@@ -126,7 +137,7 @@ public class TileMap{
 		}
 		tiles[i][j] = new Tile(x, y, tileSize, sprites[sprite],solid);
 		x += tileSize; //move column
-            }
+	    }
 	    y += tileSize; //moves over row when 1 is finished (now it should start at 0,0)
 	}
     }
