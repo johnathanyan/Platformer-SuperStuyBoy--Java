@@ -10,6 +10,9 @@ public class Level1 extends Level{
     private TileMap tiles;
     private Graphics2D g;
     private Enemy enemy;
+    private ArrayList<Rectangle> boxes;
+    private int eventCount = 0;
+    private boolean transition;
     
     public Level1(Player p, Enemy _e, Graphics2D graphics){
 	g = graphics;
@@ -21,6 +24,7 @@ public class Level1 extends Level{
 	}
 	player = p;
 	enemy = _e;
+	boxes = new ArrayList<Rectangle>();
     }
   
     public Background getBackground(){
@@ -33,6 +37,8 @@ public class Level1 extends Level{
 	tiles.drawTiles(g);
     }
     public void update(){
+    if (transition = true)
+    	transition();
 	bg.update();
 	player.fixCollisions(tiles.getCollisions());
 	//tiles.checkCollisions();
@@ -40,7 +46,27 @@ public class Level1 extends Level{
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
 	tiles.drawTiles(g);
+	g.setColor(java.awt.Color.BLACK);
+	for(int x = 0; x < boxes.size(); x++)
+		g.fill(boxes.get(x));
     }
+
+    private void transition() {
+		eventCount++;
+		if(eventCount == 1) {
+			boxes.clear();
+			boxes.add(new Rectangle(0, 0, Game.WIDTH, Game.HEIGHT / 2));
+			boxes.add(new Rectangle(0, 0, Game.WIDTH / 2, Game.HEIGHT));
+			boxes.add(new Rectangle(0, Game.HEIGHT / 2, Game.WIDTH, Game.HEIGHT / 2));
+			boxes.add(new Rectangle(Game.WIDTH / 2, 0, Game.WIDTH / 2, Game.HEIGHT));
+		}
+		if(eventCount > 1 && eventCount < 60) {
+			boxes.get(0).height -= 10;
+			boxes.get(1).width -= 15;
+			boxes.get(2).y += 10;
+			boxes.get(3).x += 15;
+		}
+	}
 
     private void select() {
     }

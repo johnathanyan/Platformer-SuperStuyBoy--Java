@@ -37,7 +37,12 @@ public class LevelSwitcher {
     }
 
     public void draw(java.awt.Graphics2D g) {
-	levels.get(currentLevel).draw(g);
+	if (levels.get(currentLevel) != null)
+        levels.get(currentLevel).draw(g);
+    else {
+        g.setColor(java.awt.Color.BLACK);
+        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+    }
     }
 
     public void keyPressed(int k) {
