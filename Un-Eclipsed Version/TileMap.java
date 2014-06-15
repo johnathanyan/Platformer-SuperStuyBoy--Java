@@ -72,12 +72,50 @@ public class TileMap{
 	double botlefty = player.getY() + 32;
 	System.out.println(pixelated[(int)botlefty][(int)botleftx]);
 	System.out.println(botleftx + " " + botlefty);
-	if(pixelated[(int)botlefty][(int)botleftx] == 1){
+	if(pixelated[(int)botlefty][(int)botleftx] == 1 || pixelated[(int)botlefty][(int)botleftx] == 2){
 	    player.setMoveDown(false);
 	    System.out.println("Collision: " + botleftx + " " + 
 			       botlefty);
 	}
-    }
+	else
+		player.setMoveDown(true);
+		// top right corner
+	double toprightx = player.getX() + 32;
+	double toprighty = player.getY();
+	System.out.println(pixelated[(int)toprighty][(int)toprightx]);
+	System.out.println(toprightx + " " + toprighty);
+	if(pixelated[(int)toprighty][(int)toprightx] == 1 || pixelated[(int)toprighty][(int)toprightx] == 2){
+	    player.setMoveRight(false);
+	    System.out.println("Collision: " + toprightx + " " + 
+			       toprighty);
+	}
+	else
+		player.setMoveRight(true);
+		// top left corner of left block
+	double topleftx = player.getX();
+	double toplefty = player.getY();
+	System.out.println(pixelated[(int)toplefty][(int)topleftx]);
+	System.out.println(topleftx + " " + toplefty);
+	if(pixelated[(int)toplefty][(int)topleftx] == 1 || pixelated[(int)toplefty][(int)topleftx] == 2){
+	    player.setMoveLeft(false);
+	    System.out.println("Collision: " + topleftx + " " + 
+			       toplefty);
+	}
+	else
+		player.setMoveLeft(true);
+		//block above
+	double topx = player.getX();
+	double topy = player.getY() - 32;
+	System.out.println(pixelated[(int)topy][(int)topx]);
+	System.out.println(topx + " " + topy);
+	if(pixelated[(int)topy][(int)topx] == 1 || pixelated[(int)topy][(int)topx] == 2){
+	    player.setMoveUp(false);
+	    System.out.println("Collision: " + topx + " " + 
+			       topy);
+	}
+	else
+		player.setMoveUp(true);
+	}
 
     //splits up sheet into smaller images to be used for tiles/entities
     public void divideSheet(BufferedImage sheet){
