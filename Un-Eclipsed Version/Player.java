@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.util.*;
@@ -23,7 +24,7 @@ public class Player {
 
     private int health, sprite;
 
-    public static boolean isJumping, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
+    public static boolean isJumping, faceLeft, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -84,10 +85,28 @@ public class Player {
     }
     
     public void draw(Graphics2D g) {
-    	if (isJumping)
-			g.drawImage(jumpSprites[sprite],(int)x,(int)y,null);
-		else
-			g.drawImage(runSprites[sprite],(int)x,(int)y,null);
+    	if (isJumping){
+    		if (faceLeft)
+    			g.drawImage(getFlippedImage(jumpSprites[sprite]),(int)x,(int)y,null);	
+    		else
+				g.drawImage(jumpSprites[sprite],(int)x,(int)y,null);
+		}
+		else{
+			if (faceLeft)
+				g.drawImage(getFlippedImage(runSprites[sprite]),(int)x,(int)y,null);
+			else
+				g.drawImage(runSprites[sprite],(int)x,(int)y,null);
+		}
+    }
+
+    public static BufferedImage getFlippedImage(BufferedImage img) {
+        int w = img.getWidth();
+        int h = img.getHeight();
+        BufferedImage flippedImage = new BufferedImage(w, h, img.getType());
+        Graphics2D g = flippedImage.createGraphics();
+        g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
+        g.dispose();
+        return flippedImage;
     }
 
     public void update() {
@@ -104,7 +123,6 @@ public class Player {
 	    	cy += dy;
 	    	cy1 += dy;
 	    	cy2 += dy;
-	    //}
 		}
 		dy = 0;
 		if (isJumping) { 
@@ -164,7 +182,8 @@ public class Player {
     //public BufferedImage getArt() { return sprite; }
     
     public void jump() {
-	dy = -10; 
+    for (int i = 0; i < 10; i++)	
+		dy += -1 * i; 
 	isJumping = true;
 	startJump = true;
     }

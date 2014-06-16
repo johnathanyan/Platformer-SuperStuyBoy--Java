@@ -79,12 +79,16 @@ public class Level1 extends Level{
 	    	enemy.start = System.nanoTime();
 	    }
 	    player.right = true;
+	    player.left = false;
 	    enemy.right = true;
 	    enemy.move(5,0);
+	    player.faceLeft = false;
 	}
 	else if (k == KeyEvent.VK_LEFT) {
 	    player.move(-5,0);
 	    enemy.move(-5,0);
+	    player.left = true;
+	    player.faceLeft = true;
 	} 
 	else if (k == KeyEvent.VK_UP) {
 	    player.move(0,-5);
@@ -102,6 +106,11 @@ public class Level1 extends Level{
     	if (k == KeyEvent.VK_RIGHT){ 
     	player.right = false;
 	    enemy.right = false;
+	    enemy.start = System.nanoTime();
+    	}
+    	if (k == KeyEvent.VK_LEFT){ 
+    	player.left = false;
+	    enemy.left = false;
 	    enemy.start = System.nanoTime();
     	}
 	}
