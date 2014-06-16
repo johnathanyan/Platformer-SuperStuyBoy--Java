@@ -92,7 +92,7 @@ public class TileMap{
 	else
 		player.setMoveRight(true);
 		// top left corner of left block
-	double topleftx = player.getX();
+	double topleftx = player.getX() - 1;
 	double toplefty = player.getY();
 	System.out.println(pixelated[(int)toplefty][(int)topleftx]);
 	System.out.println(topleftx + " " + toplefty);
@@ -105,7 +105,7 @@ public class TileMap{
 		player.setMoveLeft(true);
 		//block above
 	double topx = player.getX();
-	double topy = player.getY() - 32;
+	double topy = player.getY() - 1;
 	System.out.println(pixelated[(int)topy][(int)topx]);
 	System.out.println(topx + " " + topy);
 	if(pixelated[(int)topy][(int)topx] == 1 || pixelated[(int)topy][(int)topx] == 2){

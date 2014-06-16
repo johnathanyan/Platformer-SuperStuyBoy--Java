@@ -24,7 +24,7 @@ public class Player {
 
     private int health, sprite;
 
-    public static boolean isJumping, faceLeft, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
+    public static boolean isJumping, isFalling, faceLeft, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -41,7 +41,7 @@ public class Player {
 	canMoveUp = true;
 	canMoveDown = true;
 	runSprites = new BufferedImage[6] ;
-	jumpSprites = new BufferedImage[4]; 
+	jumpSprites = new BufferedImage[2]; 
 	divideSheet(art, 4, runSprites);
 	divideSheet(art2, 2, jumpSprites);
 	x = xcor;
@@ -85,7 +85,9 @@ public class Player {
     }
     
     public void draw(Graphics2D g) {
-    	if (isJumping){
+    	if ((isJumping || isFalling) && sprite >= 1)
+			sprite = 0;
+    	if (isJumping || isFalling){
     		if (faceLeft)
     			g.drawImage(getFlippedImage(jumpSprites[sprite]),(int)x,(int)y,null);	
     		else
@@ -127,21 +129,30 @@ public class Player {
 		dy = 0;
 		if (isJumping) { 
 			if (startJump){
-				dy = - 10; 
+				dy = -10; 
 				startJump = false;
+				isFalling = true;
 			}
-			if (canMoveUp)
-				dy++;
-			else if(canMoveDown)
-				dy--;
-			if (!canMoveDown)
+			//if (canMoveUp)
+			//	dy++;
+			//else if(canMoveDown){
+			//	isFalling = true;
+			//	dy--;
+			//}
+			if (!canMoveDown){
 				isJumping = false;
+			}
 		}
-		else { 
-		    dy = 0;
+		if (canMoveDown && !isFalling) // if you're not standing on anything you fall
+			isFalling = true;
+
+		if (isFalling){ // makes you stop falling when you hit floor
+			if (!canMoveDown)
+				isFalling = false;
 		}
+
 		if (left || right){
-			if (!isJumping){
+			if (!isJumping || !isFalling){
 				if (sprite >= (runSprites.length / 2)){
 					if (elapsed > 85){
 						sprite = 0;
@@ -161,8 +172,10 @@ public class Player {
 					if (elapsed > 130)
 						sprite = 0;
 				}
+		if ((isJumping || isFalling) && sprite >= 1)
+			sprite = 0;
 			
-		if (isJumping && y < 600) { dy++; }
+		if (isFalling && y < 600) { dy++; } // makes you fall w gravity
 		else { 
 		    isJumping = false;
 		    dy = 0;

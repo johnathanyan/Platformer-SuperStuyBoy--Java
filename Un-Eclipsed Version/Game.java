@@ -42,7 +42,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	try {
 	    playerSprite = ImageIO.read(new File("running.png"));
 	    playerSprite2 = ImageIO.read(new File("jumping.png"));
-	    player = new Player(playerSprite, playerSprite2, 32.0,32.0);
+	    player = new Player(playerSprite, playerSprite2, 200.0,300.0);
 	    enemySprite = ImageIO.read(new File("link.gif"));
 	    enemy = new Enemy(enemySprite,300.0,300.0);
 	    enemies.add(enemy);
