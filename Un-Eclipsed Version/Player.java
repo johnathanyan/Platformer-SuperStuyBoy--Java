@@ -9,7 +9,8 @@ import java.lang.Math;
 
 public class Player {
 
-    private BufferedImage sprite;
+    private BufferedImage[] runSprites;
+    private BufferedImage[] jumpSprites;
     private double x;
     private double y;
     private double dx;
@@ -18,9 +19,11 @@ public class Player {
     //x and y are top left corner, cx,cy are center of sprite
     //cx1,cx2,cy1,cy2 are midpoints of edges of sprite
 
-    private int health;
+    public static long start;
 
-    private static boolean isJumping, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
+    private int health, sprite;
+
+    public static boolean isJumping, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
     //I changed the direction to a boolean which is easier to control
     //in the keylistener. When the key is released you can just set it to false
     //instead of having to use another string for no movement.
@@ -31,12 +34,15 @@ public class Player {
     private double resistance;
     private double gravity;
 
-    public Player(BufferedImage art, double xcor, double ycor) {
+    public Player(BufferedImage art, BufferedImage art2, double xcor, double ycor) {
 	canMoveRight = true;
 	canMoveLeft = true;
 	canMoveUp = true;
-	canMoveDown = true; 
-	sprite = art;
+	canMoveDown = true;
+	runSprites = new BufferedImage[6] ;
+	jumpSprites = new BufferedImage[4]; 
+	divideSheet(art, 4, runSprites);
+	divideSheet(art2, 2, jumpSprites);
 	x = xcor;
 	y = ycor;
 	cx = xcor + 16;
@@ -47,6 +53,15 @@ public class Player {
 	cy2 = ycor;
     }
     
+    public void divideSheet(BufferedImage sheet, int count, BufferedImage[] sprites){
+		int tileSize = 32;
+		for (int i = 0; i < count; i++){
+			sprites[i] = sheet.getSubimage(i * tileSize, 0, tileSize, tileSize);
+		}
+		for (int i = count - 1; i > 1; i--)
+			sprites[(sprites.length % count)] = sheet.getSubimage(i * tileSize, 0, tileSize, tileSize);
+	}
+
     public boolean checkCollision(Tile t) {
 	boolean colliding = false; 
 	if ((Math.abs(cx-t.getX()) < 32)&&(Math.abs(cy-t.getY()) < 32))
@@ -69,10 +84,14 @@ public class Player {
     }
     
     public void draw(Graphics2D g) {
-	g.drawImage(sprite,(int)x,(int)y,null);
+    	if (isJumping)
+			g.drawImage(jumpSprites[sprite],(int)x,(int)y,null);
+		else
+			g.drawImage(runSprites[sprite],(int)x,(int)y,null);
     }
 
     public void update() {
+    	long elapsed = (System.nanoTime() - start) / 1000000;
 		if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
 			x += dx;
 			cx += dx;
@@ -97,8 +116,37 @@ public class Player {
 				dy++;
 			else if(canMoveDown)
 				dy--;
+			if (!canMoveDown)
+				isJumping = false;
 		}
 		else { 
+		    dy = 0;
+		}
+		if (left || right){
+			if (!isJumping){
+				if (sprite >= (runSprites.length / 2)){
+					if (elapsed > 85){
+						sprite = 0;
+						start = System.nanoTime();
+					}
+				}
+				else{
+					if (elapsed > 100){
+						sprite++;
+						start = System.nanoTime();
+					}
+				}
+				
+			}
+		}	
+				if (!left && !right){
+					if (elapsed > 130)
+						sprite = 0;
+				}
+			
+		if (isJumping && y < 600) { dy++; }
+		else { 
+		    isJumping = false;
 		    dy = 0;
 		}
 	    }
@@ -113,7 +161,7 @@ public class Player {
     public double getTop() { return cy2; }
     
     
-    public BufferedImage getArt() { return sprite; }
+    //public BufferedImage getArt() { return sprite; }
     
     public void jump() {
 	dy = -10; 

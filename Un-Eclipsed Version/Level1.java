@@ -11,7 +11,7 @@ public class Level1 extends Level{
     private Graphics2D g;
     private Enemy enemy;
     private ArrayList<Rectangle> boxes;
-    private int eventCount = 0;
+    private int event = 0;
     private boolean transition;
     
     public Level1(Player p, Enemy _e, Graphics2D graphics){
@@ -51,15 +51,15 @@ public class Level1 extends Level{
     }
 
     private void transition() {
-		eventCount++;
-		if(eventCount == 1) {
+		event++;
+		if(event == 1) {
 			boxes.clear();
 			boxes.add(new Rectangle(0, 0, Game.WIDTH, Game.HEIGHT / 2));
 			boxes.add(new Rectangle(0, 0, Game.WIDTH / 2, Game.HEIGHT));
 			boxes.add(new Rectangle(0, Game.HEIGHT / 2, Game.WIDTH, Game.HEIGHT / 2));
 			boxes.add(new Rectangle(Game.WIDTH / 2, 0, Game.WIDTH / 2, Game.HEIGHT));
 		}
-		if(eventCount > 1 && eventCount < 60) {
+		if(event > 1 && event < 60) {
 			boxes.get(0).height -= 10;
 			boxes.get(1).width -= 15;
 			boxes.get(2).y += 10;
@@ -78,6 +78,7 @@ public class Level1 extends Level{
 	    if (enemy.right != true){
 	    	enemy.start = System.nanoTime();
 	    }
+	    player.right = true;
 	    enemy.right = true;
 	    enemy.move(5,0);
 	}
@@ -99,6 +100,7 @@ public class Level1 extends Level{
 
     public void keyReleased(int k) {
     	if (k == KeyEvent.VK_RIGHT){ 
+    	player.right = false;
 	    enemy.right = false;
 	    enemy.start = System.nanoTime();
     	}
