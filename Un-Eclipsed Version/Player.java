@@ -120,35 +120,40 @@ public class Player {
 			cx2 += dx;
 		}
 		dx = 0;
-        if(((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)){        
-	    	y += dy;
-	    	cy += dy;
-	    	cy1 += dy;
-	    	cy2 += dy;
-		}
-		dy = 0;
+      
+        
 		if (isJumping) { 
 			if (startJump){
-				dy = -10; 
+				dy = -80; 
 				startJump = false;
 				isFalling = true;
 			}
+			//if (dy<0) {dy+=3;}
 			//if (canMoveUp)
 			//	dy++;
 			//else if(canMoveDown){
 			//	isFalling = true;
 			//	dy--;
 			//}
-			if (!canMoveDown){
-				isJumping = false;
-			}
+	        
+		}
+		if(((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)){        
+		    y += dy;
+		    cy += dy;
+		    cy1 += dy;
+		    cy2 += dy;
+		    if (!isJumping)
+			dy = 0;
+		    
 		}
 		if (canMoveDown && !isFalling) // if you're not standing on anything you fall
 			isFalling = true;
 
 		if (isFalling){ // makes you stop falling when you hit floor
-			if (!canMoveDown)
-				isFalling = false;
+		    if (!canMoveDown) {
+			isFalling = false;
+			isJumping = false;
+		    }
 		}
 
 		if (left || right){
@@ -176,10 +181,10 @@ public class Player {
 			sprite = 0;
 			
 		if (isFalling && y < 600) { dy++; } // makes you fall w gravity
-		else { 
+		/*else { 
 		    isJumping = false;
 		    dy = 0;
-		}
+		    }*/
 	    }
     
     public double getX() {return x;}
@@ -195,10 +200,12 @@ public class Player {
     //public BufferedImage getArt() { return sprite; }
     
     public void jump() {
-    for (int i = 0; i < 10; i++)	
-		dy += -1 * i; 
-	isJumping = true;
-	startJump = true;
+	if (!isJumping && !isFalling) {
+	    /*for (int i = 0; i < 10; i++)	
+	      dy += -1 * i;*/ 
+	    isJumping = true;
+	    startJump = true;
+	}
     }
 
     public void setMoveRight(boolean b) { canMoveRight = b; }
