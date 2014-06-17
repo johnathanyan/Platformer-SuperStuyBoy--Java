@@ -10,8 +10,7 @@ import java.lang.Math;
 
 public class Enemy{
 
-    private BufferedImage[] runSprites;
-    private BufferedImage[] jumpSprites;
+    private BufferedImage sprite;
     private double x;
     private double y;
     private double dx;
@@ -20,7 +19,7 @@ public class Enemy{
     
     public static long start;
     
-    private int health, sprite; //check when to turn enemy;
+    private int health; //check when to turn enemy;
     
     private boolean faceLeft, faceRight;
     public static boolean isJumping, isFalling, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
@@ -37,10 +36,12 @@ public class Enemy{
 	canMoveLeft = true;
 	canMoveUp = true;
 	canMoveDown = true;
-	runSprites = new BufferedImage[6] ;
-	jumpSprites = new BufferedImage[2]; 
-	divideSheet(art, 4, runSprites);
-	divideSheet(art2, 2, jumpSprites);
+	try{
+	sprite = ImageIO.read(new File("spike.png"));
+	}
+	catch(Exception e){
+		e.printStackTrace();
+	}
 	x = xcor;
 	y = ycor;
 	cx = xcor + 16;
@@ -81,21 +82,8 @@ public class Enemy{
     }
     
     public void draw(Graphics2D g) {
-    	if ((isJumping || isFalling) && sprite >= 1)
-	    sprite = 0;
-    	if (isJumping || isFalling){
-	    if (faceLeft)
-		g.drawImage(getFlippedImage(jumpSprites[sprite]),(int)x,(int)y,null);	
-	    else
-		g.drawImage(jumpSprites[sprite],(int)x,(int)y,null);
+		g.drawImage(sprite,(int)x,(int)y,null);
 	}
-	else{
-	    if (faceLeft)
-		g.drawImage(getFlippedImage(runSprites[sprite]),(int)x,(int)y,null);
-	    else
-		g.drawImage(runSprites[sprite],(int)x,(int)y,null);
-	}
-    }
 
     public static BufferedImage getFlippedImage(BufferedImage img) {
         int w = img.getWidth();
@@ -144,29 +132,7 @@ public class Enemy{
 	    }
 	}
 
-	if (left || right){
-	    if (!isJumping || !isFalling){
-		if (sprite >= (runSprites.length / 2)){
-		    if (elapsed > 85){
-			sprite = 0;
-			start = System.nanoTime();
-		    }
-		}
-		else{
-		    if (elapsed > 100){
-			sprite++;
-			start = System.nanoTime();
-		    }
-		}
-				
-	    }
-	}	
-	if (!left && !right){
-	    if (elapsed > 130)
-		sprite = 0;
-	}
-	if ((isJumping || isFalling) && sprite >= 1)
-	    sprite = 0;
+	
 			
 	if (isFalling && y < 600) { dy += 4; }
 	/*else { 
