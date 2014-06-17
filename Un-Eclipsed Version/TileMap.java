@@ -3,8 +3,10 @@ import java.util.*;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.*;
+import java.io.File;
 
 public class TileMap{
+    private BufferedImage portal; 
     private int tileSize, mapWidth, mapHeight;
     private int x, y;
     private int[][] map;
@@ -17,6 +19,7 @@ public class TileMap{
     private int px, py;
     private int[][] pixelated;
     private PrintWriter out;
+    boolean nextLevel;
 
     //reads file of ints to determine which sprites to use
     public TileMap(Player p, String path, String sheetPath, int tileSize){
@@ -64,7 +67,13 @@ public class TileMap{
 	    e.printStackTrace();
 	}
 	divideSheet(spriteSheet);
+	try { 
+	    portal = ImageIO.read(new File("portal.gif"));
+	}
+	catch(Exception e) { e.printStackTrace(); }
     }
+    
+    public boolean getNextLevel() { return nextLevel; }
 
     public void collider(){
         //bot left corner
@@ -114,8 +123,11 @@ public class TileMap{
 			       topy);
 	}
 	else
-		player.setMoveUp(true);
-	}
+	    player.setMoveUp(true);
+	if (pixelated[(int)toplefty][(int)topleftx] == 6) { 
+	    nextLevel = true;
+	    System.out.println("swag");}
+    }
 
     //splits up sheet into smaller images to be used for tiles/entities
     public void divideSheet(BufferedImage sheet){
@@ -173,7 +185,14 @@ public class TileMap{
 		    sprite = 7;
 		    solid = false;
 		}
-		tiles[i][j] = new Tile(x, y, tileSize, sprites[sprite],solid);
+		else if(type == 6){
+		    g.drawImage(portal,x,y,null);
+		    solid = false; 
+		}
+		if (type!=6) 
+		    tiles[i][j] = new Tile(x, y, tileSize, sprites[sprite],solid);
+		else 
+		    tiles[i][j] = new Tile(x,y,tileSize,portal,solid);
 		x += tileSize; //move column
 	    }
 	    y += tileSize; //moves over row when 1 is finished (now it should start at 0,0)

@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.util.*;
 
-public class Level1 extends Level{
+public class Level2 extends Level{
     private Background bg;
     private Player player;
     private TileMap tiles;
@@ -14,9 +14,9 @@ public class Level1 extends Level{
     private int event = 0;
     private boolean transition;
     
-    public Level1(Player p, Enemy _e, Graphics2D graphics){
+    public Level2(Player p, Enemy _e, Graphics2D graphics){
 	g = graphics;
-	tiles = new TileMap(p,"test.txt", "spritesheet.png", 32);
+	tiles = new TileMap(p,"test2.txt", "spritesheet.png", 32);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){

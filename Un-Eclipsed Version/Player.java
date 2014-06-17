@@ -212,7 +212,17 @@ public class Player {
     public void setMoveUp(boolean b) { canMoveUp = b; }
     public void setMoveDown(boolean b) { canMoveDown = b; }
     public void setMoveLeft(boolean b) { canMoveLeft = b; }
-
+    public void setXY(double a, double b) {
+	x = a;
+	y = b;
+	cx = a + 16;
+	cy = b + 16;
+	cx1 = a;
+	cx2 = a+32;
+	cy1 = b+32;
+	cy2 = b;
+    }
+    
     public void move(double x, double y){ // continously call this w/ a thread
 	/*	if(left){
 	    dx = dx - walkingSpeed;

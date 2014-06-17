@@ -18,7 +18,8 @@ public class LevelSwitcher {
 	player = p;
     enemy = _e;
 	levels.add(new Level1(player, enemy, g));
-    levels.add(new Credits(this));
+	levels.add(new Level2(player, enemy, g));
+	levels.add(new Credits(this));
 	currentLevel = MENU;
 	
     }
@@ -29,11 +30,14 @@ public class LevelSwitcher {
 
     public void setlevel(int level){
 	currentLevel = level;
+	//player.setXY(0,0);
 	levels.get(currentLevel).init();
     }
 
     public void update() {
 	levels.get(currentLevel).update();
+	if (levels.get(currentLevel).getNextLevel()) 
+	    setlevel(currentLevel+1);
     }
 
     public void draw(java.awt.Graphics2D g) {

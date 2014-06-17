@@ -39,7 +39,7 @@ public class Menu extends Level {
     public void update(){
 	bg.update();
     }
-
+    
     public Background getBackground(){
 	return bg;
     }
@@ -57,7 +57,7 @@ public class Menu extends Level {
 	    g.drawString(options[i], 512, 476+i*32);
 	}
     }
-
+    public boolean getNextLevel(){ return false; }
     private void select() {
 	if (currentChoice == 0){ // start
 	    manager.setlevel(1);

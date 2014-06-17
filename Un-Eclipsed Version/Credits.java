@@ -25,7 +25,9 @@ public class Credits extends Level {
     public void update(){
 	bg.update();
     }
-
+    public boolean getNextLevel() {
+	return false;}
+    
     public Background getBackground(){
 	return bg;
     }
