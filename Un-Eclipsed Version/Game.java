@@ -133,7 +133,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 		
     private void draw(){
 	manager.draw(g);
-	if (! (manager.getCurrentLevel() instanceof Menu)) {
+	if (! (menu)) {
 	    player.draw(g);
 	    for (Enemy e : enemies) {
 		e.draw(g);

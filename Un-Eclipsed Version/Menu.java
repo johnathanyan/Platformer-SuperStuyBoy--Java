@@ -79,12 +79,9 @@ public class Menu extends Level {
 	    
 	}
 	if (currentChoice == 1){ // credits
-<<<<<<< HEAD
 	    manager.setlevel(2);
 	    Game.menu = true;
-=======
 	    manager.setlevel(3);
->>>>>>> origin/master
 	    Player.x = 200;
 	    Player.y = 300;
 	    Player.right = false;
