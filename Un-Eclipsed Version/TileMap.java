@@ -240,7 +240,7 @@ public class TileMap{
 		    solid = false;
 		}
 		else if(type == 6){
-		    g.drawImage(portal,x,y,null);
+		    g.drawImage(sprites[2],x,y,null);
 		    solid = false; 
 		}
 		if (type!=6) 

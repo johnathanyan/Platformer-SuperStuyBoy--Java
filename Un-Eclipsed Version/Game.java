@@ -91,7 +91,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     
     private void checkDeaths() {
 	for (Enemy e : enemies) {
-	    if (Math.abs(e.getX()-(player.getX())) < 1 && Math.abs(e.getY()-(player.getY())) < 1) {
+	    if (Math.abs(e.getX()-(player.getX())) < 10 && Math.abs(e.getY()-(player.getY())) < 10) {
 		player.setXY(1,1);
 		manager.setlevel(3);
 	    }
