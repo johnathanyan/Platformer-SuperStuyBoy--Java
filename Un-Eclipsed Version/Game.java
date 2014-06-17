@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import javax.swing.JPanel;
 import java.util.*;
+import java.lang.Math;
 
 public class Game extends JPanel implements Runnable, KeyListener{
     // game window size
@@ -44,9 +45,9 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    playerSprite2 = ImageIO.read(new File("jumping.png"));
 	    player = new Player(playerSprite, playerSprite2, 200.0,300.0);
 	    enemySprite = ImageIO.read(new File("link.gif"));
-	    enemy = new Enemy(enemySprite,300.0,300.0);
+	    enemy = new Enemy(enemySprite,enemySprite,300.0,300.0);
 	    enemies.add(enemy);
-	    enemies.add(new Enemy(enemySprite,200.0,200.0));
+	    enemies.add(new Enemy(enemySprite,enemySprite,200.0,200.0));
 	}
 	catch(Exception e) {e.printStackTrace();}
 	manager = new LevelSwitcher(player, enemies, g);
@@ -74,6 +75,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    draw();
 	    update();
 	    drawToScreen();
+	    checkDeaths();
 	    elapsedTime = System.nanoTime() - startTime;
 	    waitTime = targetTime - elapsedTime / 1000000;
 	    try {
@@ -86,12 +88,22 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    }
 	}
     }
-
+    
+    private void checkDeaths() {
+	for (Enemy e : enemies) {
+	    if (Math.abs(e.getX()-(player.getX())) < 1 && Math.abs(e.getY()-(player.getY())) < 1) {
+		player.setXY(1,1);
+		manager.setlevel(3);
+	    }
+	}
+    }
+		
+    
     private void update(){
 	manager.update();
 	player.update();
 	for (Enemy e : enemies) { 
-	    e.update(g);	   
+	    e.update();	   
 	}
 	
     }

@@ -17,13 +17,13 @@ public class Enemy{
     private double dx;
     private double dy;
     private double cx,cy,cx1,cy1,cx2,cy2;
-
+    
     public static long start;
-
-    private int health, sprite //check when to turn enemy;
-
+    
+    private int health, sprite; //check when to turn enemy;
+    
     private boolean faceLeft, faceRight;
-    public static boolean isJumping, isFalling, faceLeft, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
+    public static boolean isJumping, isFalling, left, right, canMoveLeft, canMoveRight, canMoveUp, canMoveDown, startJump;
 
     private double walkingSpeed;
     private double xMax; 
@@ -31,7 +31,8 @@ public class Enemy{
     private double resistance;
     private double gravity;
 
-    public Player(BufferedImage art, BufferedImage art2, double xcor, double ycor) {
+    public Enemy(BufferedImage art, BufferedImage art2, double xcor, double ycor) {
+	faceRight = true; 
 	canMoveRight = true;
 	canMoveLeft = true;
 	canMoveUp = true;
@@ -49,7 +50,9 @@ public class Enemy{
 	cy1 = ycor+32;
 	cy2 = ycor;
     }
-    
+    public boolean getRight() { return faceRight; }
+    public void setRight(boolean b) { faceRight = b; } 
+
     public void divideSheet(BufferedImage sheet, int count, BufferedImage[] sprites){
 	int tileSize = 32;
 	for (int i = 0; i < count; i++){
@@ -174,12 +177,12 @@ public class Enemy{
     
     public double getX() {return x;}
     public double getY() { return y;}
-    public double getCX() { return cx; }
+    /* public double getCX() { return cx; }
     public double getCY() { return cy; }
     public double getLeft() { return cx1; }
     public double getRight() { return cx2; }
     public double getBottom() { return cy1; }
-    public double getTop() { return cy2; }
+    public double getTop() { return cy2; }*/
     
     public void jump() {
 	if (!isJumping && !isFalling) {
@@ -187,7 +190,8 @@ public class Enemy{
 	    startJump = true;
 	}
     }
-
+    public boolean canMoveRight() { return canMoveRight; }
+    public boolean canMoveLeft() { return canMoveLeft; } 
     public void setMoveRight(boolean b) { canMoveRight = b; }
     public void setMoveUp(boolean b) { canMoveUp = b; }
     public void setMoveDown(boolean b) { canMoveDown = b; }

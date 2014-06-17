@@ -179,10 +179,8 @@ public class TileMap{
 	}
 	else
 	    e.setMoveUp(true);
-	if (pixelated[(int)toplefty][(int)topleftx] == 6) { 
-	    nextLevel = true;
-	    System.out.println("swag");}
-      }}
+      }
+  }
 
 
     //splits up sheet into smaller images to be used for tiles/entities

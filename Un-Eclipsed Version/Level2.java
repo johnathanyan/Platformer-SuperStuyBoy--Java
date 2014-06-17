@@ -39,12 +39,26 @@ public class Level2 extends Level{
     public void init(){
 	tiles.drawTiles(g);
     }
-    public void update(){
-    if (transition = true)
-    	transition();
+   public void update(){
+	if (transition = true)
+	    transition();
 	bg.update();
-        tiles.collider();
+	tiles.collider();
 	tiles.enemyCollider();
+	for (Enemy e : enemies) {
+	    if (e.getRight()) { 
+		if (e.canMoveRight())
+		    e.move(3,0);
+		else
+		    e.setRight(false);
+	    }
+	    else {
+		if (e.canMoveLeft()) 
+		    e.move(-3,0);
+		else 
+		    e.setRight(true);
+	    }
+	}
     }
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
