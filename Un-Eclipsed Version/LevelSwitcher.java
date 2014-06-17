@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class LevelSwitcher {
-    private ArrayList<Level> levels;
+    private LinkedList<Level> levels;
     private Player player;
     private ArrayList<Enemy> enemies;  
     private ArrayList<Trap> traps;
@@ -14,7 +15,7 @@ public class LevelSwitcher {
 	
     public LevelSwitcher(Player p, ArrayList<Enemy> _e, ArrayList<Trap> _t, Graphics2D graphics) {
 	g = graphics;
-	levels = new ArrayList<Level>();
+	levels = new LinkedList<Level>();
 	levels.add(new Menu(this));
 	player = p;
 	enemies = _e;
@@ -28,7 +29,7 @@ public class LevelSwitcher {
 	
     }
     
-    public ArrayList<Level> getLevels(){
+    public LinkedList<Level> getLevels(){
 	return levels;
     }
 
