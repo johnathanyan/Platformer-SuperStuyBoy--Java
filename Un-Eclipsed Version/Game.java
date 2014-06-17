@@ -17,7 +17,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     private ArrayList<Trap> traps;
     private ArrayList<Enemy> enemies;
     private Thread thread; // allows for multiple actions at a time
-    private boolean isRunning;
+    public static boolean isRunning, menu;
     private int FPS = 60; // frames per second
     private long targetTime = 1000 / FPS;
 
@@ -94,26 +94,28 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
     
     private void checkDeaths() {
-	boolean eDeath = false;
-	boolean tDeath = false;
-	for (Enemy e : enemies) {
-	    if (Math.abs(e.getX()-(player.getX())) < 10 && Math.abs(e.getY()-(player.getY())) < 10) {
-		eDeath = true;
-	    }
-	}
-	for (Trap t : traps) { 
-	    if (Math.abs(t.getX()-(player.getX())) < 10 && Math.abs(t.getY()-(player.getY())) < 10) {
-		tDeath = true;
-	    }
-	}
-	if (eDeath || tDeath) {
-	    player.setXY(1,1);
-	    player.setMoveLeft(false);
-	    player.setMoveRight(false);
-	    player.setMoveUp(false);
-	    player.setMoveDown(false);
-	    manager.setlevel(3);
-	}
+    	if (!menu){
+			boolean eDeath = false;
+			boolean tDeath = false;
+			for (Enemy e : enemies) {
+			    if (Math.abs(e.getX()-(player.getX())) < 10 && Math.abs(e.getY()-(player.getY())) < 10) {
+				eDeath = true;
+			    }
+			}
+			for (Trap t : traps) { 
+			    if (Math.abs(t.getX()-(player.getX())) < 10 && Math.abs(t.getY()-(player.getY())) < 10) {
+				tDeath = true;
+			    }
+			}
+			if (eDeath || tDeath) {
+			    player.setXY(1,1);
+			    player.setMoveLeft(false);
+			    player.setMoveRight(false);
+			    player.setMoveUp(false);
+			    player.setMoveDown(false);
+			    manager.setlevel(3);
+			}
+		}
     }
 		
     

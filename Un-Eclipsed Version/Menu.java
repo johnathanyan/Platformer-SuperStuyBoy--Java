@@ -69,6 +69,7 @@ public class Menu extends Level {
 	if (currentChoice == 0){ // start
 	    manager.setlevel(1);
 	    manager.update();
+	    Game.menu = false;
 	    manager.getLevels().get(1).getBackground();
 	    Player.x = 200;
 	    Player.y = 300;
@@ -79,6 +80,7 @@ public class Menu extends Level {
 	}
 	if (currentChoice == 1){ // credits
 	    manager.setlevel(2);
+	    Game.menu = true;
 	    Player.x = 200;
 	    Player.y = 300;
 	    Player.right = false;

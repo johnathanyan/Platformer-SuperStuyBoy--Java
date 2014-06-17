@@ -124,7 +124,7 @@ public class Player {
         
 	if (isJumping) { 
 	    if (startJump){
-		dy = -20; 
+		dy = -30; 
 		startJump = false;
 		isFalling = true;
 	    }
@@ -185,7 +185,7 @@ public class Player {
 	if ((isJumping || isFalling) && sprite >= 1)
 	    sprite = 0;
 			
-	if (isFalling && y < 600) { dy += 4; } // makes you fall w gravity
+	if (isFalling && y < 600) { dy += 2; } // makes you fall w gravity
 	/*else { 
 	  isJumping = false;
 	  dy = 0;

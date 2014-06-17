@@ -21,6 +21,7 @@ public class LevelSwitcher {
 	levels.add(new Level2(player, enemies, g));
 	levels.add(new Credits(this));
 	currentLevel = MENU;
+    Game.menu = true;
 	
     }
     
