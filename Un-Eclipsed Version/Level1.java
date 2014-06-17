@@ -93,7 +93,7 @@ public class Level1 extends Level{
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
 	else if (k == KeyEvent.VK_RIGHT){
-	    player.move(5,0);
+	    //player.move(5,0);
 	    /* if (enemy.right != true){
 	       enemy.start = System.nanoTime();*/
 	    
@@ -104,12 +104,12 @@ public class Level1 extends Level{
 	    player.faceLeft = false;
 	}
 	else if (k == KeyEvent.VK_LEFT) {
-	    player.move(-5,0);
+	    //player.move(-5,0);
 	    //enemy.move(-5,0);
 	    player.left = true;
 	    player.faceLeft = true;
 	} 
-	else if (k == KeyEvent.VK_UP) {
+	/*else if (k == KeyEvent.VK_UP) {
 	    player.move(0,-5);
 	    //enemy.move(0,-5);
 	}
@@ -117,7 +117,9 @@ public class Level1 extends Level{
 	    player.move(0,5);  
 	    //enemy.move(0,5);
  	   }
+ 	*/
 	}
+
 
     public void update(int k){}
 

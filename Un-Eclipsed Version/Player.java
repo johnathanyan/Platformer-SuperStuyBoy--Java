@@ -156,6 +156,11 @@ public class Player {
 	    }
 	}
 
+	if (right)
+		move(3,0);
+	if (left)
+		move(-3,0);
+
 	if (left || right){
 	    if (!isJumping || !isFalling){
 		if (sprite >= (runSprites.length / 2)){
