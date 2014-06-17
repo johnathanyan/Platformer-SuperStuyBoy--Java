@@ -54,7 +54,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    traps.add(new Trap("trap.png",15,600,5,0));
 	}
 	catch(Exception e) {e.printStackTrace();}
-	manager = new LevelSwitcher(player, enemies, g);
+	manager = new LevelSwitcher(player, enemies, traps, g);
 	//System.out.println(manager.getPlayer());
     }
 
