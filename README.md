@@ -29,7 +29,8 @@ Log:
 - Thomas (6/12) - Added background, worked on coordinate based methods and vars in player and level
 - Thomas (6/13) - First attempt at collision detection using coordinate ranges, and instantiated enemies in game.java
 - Thomas (6/14) - Second and third attempts at collision detection using TileMap.java and for loops
-- Thomas (6/16) - Added functional level switching, multiple enemies with basic AI, and player death mechanics
+- Thomas (6/16) - Added functional level switching, multiple enemies with basic AI, player death mechanics, and traps- the spinning disks
+			that move with constant velocity and reset to a spawn point when they pass the edge of the level
 
 
 Proposal:
