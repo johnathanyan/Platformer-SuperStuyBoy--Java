@@ -38,6 +38,21 @@ Log:
 Proposal:
 - A platform style RPG game, similar to Super Meat Boy.
 
+What Works:
+- Menu and credits screen
+- Level switches
+- Player mechanics
+- Generating levels based on text file
+- Portals
+- 50% of Collision Detection
+- Enemies colliding with player
+- Music
+- Transition Effects
+
+What Doesn't:
+- Not as smooth as we wanted
+- Collision detection is buggy (we wrote it from scratch)
+
 Instructions:
 - Run Window.java
 - Use arrow keys to move and space bar to jump.
