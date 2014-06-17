@@ -9,21 +9,21 @@ public class Level2 extends Level{
     private Player player;
     private TileMap tiles;
     private Graphics2D g;
-    private Enemy enemy;
+    private ArrayList<Enemy> enemies;
     private ArrayList<Rectangle> boxes;
     private int event = 0;
     private boolean transition;
     
-    public Level2(Player p, Enemy _e, Graphics2D graphics){
+    public Level2(Player p, ArrayList<Enemy> _e, Graphics2D graphics){
 	g = graphics;
-	tiles = new TileMap(p,"test2.txt", "spritesheet.png", 32);
+	tiles = new TileMap(p,_e,"test2.txt", "spritesheet.png", 32);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
 	    e.printStackTrace();
 	}
 	player = p;
-	enemy = _e;
+	enemies = _e;
 	boxes = new ArrayList<Rectangle>();
     }
   
@@ -44,6 +44,7 @@ public class Level2 extends Level{
     	transition();
 	bg.update();
         tiles.collider();
+	tiles.enemyCollider();
     }
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
@@ -73,33 +74,33 @@ public class Level2 extends Level{
     private void select() {
     }
 
-    public void keyPressed(int k){
+  public void keyPressed(int k){
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
 	else if (k == KeyEvent.VK_RIGHT){
 	    player.move(5,0);
-	    if (enemy.right != true){
-	    	enemy.start = System.nanoTime();
-	    }
+	    /* if (enemy.right != true){
+	       enemy.start = System.nanoTime();*/
+	    
 	    player.right = true;
 	    player.left = false;
-	    enemy.right = true;
-	    enemy.move(5,0);
+	    //  enemy.right = true;
+	    // enemy.move(5,0);
 	    player.faceLeft = false;
 	}
 	else if (k == KeyEvent.VK_LEFT) {
 	    player.move(-5,0);
-	    enemy.move(-5,0);
+	    //enemy.move(-5,0);
 	    player.left = true;
 	    player.faceLeft = true;
 	} 
 	else if (k == KeyEvent.VK_UP) {
 	    player.move(0,-5);
-	    enemy.move(0,-5);
+	    //enemy.move(0,-5);
 	}
 	else if (k == KeyEvent.VK_DOWN) {
 	    player.move(0,5);  
-	    enemy.move(0,5);
+	    //enemy.move(0,5);
  	   }
 	}
 
@@ -108,13 +109,13 @@ public class Level2 extends Level{
     public void keyReleased(int k) {
     	if (k == KeyEvent.VK_RIGHT){ 
     	player.right = false;
-	    enemy.right = false;
-	    enemy.start = System.nanoTime();
+	//enemy.right = false;
+	//enemy.start = System.nanoTime();
     	}
     	if (k == KeyEvent.VK_LEFT){ 
     	player.left = false;
-	    enemy.left = false;
-	    enemy.start = System.nanoTime();
+	//enemy.left = false;
+	//  enemy.start = System.nanoTime();
     	}
 	}
 

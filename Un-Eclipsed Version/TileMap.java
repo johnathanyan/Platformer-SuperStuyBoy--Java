@@ -19,10 +19,12 @@ public class TileMap{
     private int px, py;
     private int[][] pixelated;
     private PrintWriter out;
+    private ArrayList<Enemy> enemies;
     boolean nextLevel;
 
     //reads file of ints to determine which sprites to use
-    public TileMap(Player p, String path, String sheetPath, int tileSize){
+    public TileMap(Player p, ArrayList<Enemy> monsters, String path, String sheetPath, int tileSize){
+	enemies = monsters;
 	this.player = p;
 	this.tileSize = tileSize;
 	try{
@@ -128,6 +130,60 @@ public class TileMap{
 	    nextLevel = true;
 	    System.out.println("swag");}
     }
+  public void enemyCollider(){
+      for (Enemy e : enemies) {
+	double botleftx = e.getX();
+	double botlefty = e.getY() + 32;
+	System.out.println(pixelated[(int)botlefty][(int)botleftx]);
+	System.out.println(botleftx + " " + botlefty);
+	if(pixelated[(int)botlefty][(int)botleftx] == 1 || pixelated[(int)botlefty][(int)botleftx] == 2){
+	    e.setMoveDown(false);
+	    System.out.println("Collision: " + botleftx + " " + 
+			       botlefty);
+	}
+	else
+	    e.setMoveDown(true);
+		// top right corner
+	double toprightx = e.getX() + 32;
+	double toprighty = e.getY();
+	System.out.println(pixelated[(int)toprighty][(int)toprightx]);
+	System.out.println(toprightx + " " + toprighty);
+	if(pixelated[(int)toprighty][(int)toprightx] == 1 || pixelated[(int)toprighty][(int)toprightx] == 2){
+	    e.setMoveRight(false);
+	    System.out.println("Collision: " + toprightx + " " + 
+			       toprighty);
+	}
+	else
+		e.setMoveRight(true);
+		// top left corner of left block
+	double topleftx = e.getX() - 1;
+	double toplefty = e.getY();
+	System.out.println(pixelated[(int)toplefty][(int)topleftx]);
+	System.out.println(topleftx + " " + toplefty);
+	if(pixelated[(int)toplefty][(int)topleftx] == 1 || pixelated[(int)toplefty][(int)topleftx] == 2){
+	    e.setMoveLeft(false);
+	    System.out.println("Collision: " + topleftx + " " + 
+			       toplefty);
+	}
+	else
+		e.setMoveLeft(true);
+		//block above
+	double topx = e.getX();
+	double topy = e.getY() - 1;
+	System.out.println(pixelated[(int)topy][(int)topx]);
+	System.out.println(topx + " " + topy);
+	if(pixelated[(int)topy][(int)topx] == 1 || pixelated[(int)topy][(int)topx] == 2){
+	    e.setMoveUp(false);
+	    System.out.println("Collision: " + topx + " " + 
+			       topy);
+	}
+	else
+	    e.setMoveUp(true);
+	if (pixelated[(int)toplefty][(int)topleftx] == 6) { 
+	    nextLevel = true;
+	    System.out.println("swag");}
+      }}
+
 
     //splits up sheet into smaller images to be used for tiles/entities
     public void divideSheet(BufferedImage sheet){

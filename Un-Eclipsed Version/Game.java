@@ -46,9 +46,10 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    enemySprite = ImageIO.read(new File("link.gif"));
 	    enemy = new Enemy(enemySprite,300.0,300.0);
 	    enemies.add(enemy);
+	    enemies.add(new Enemy(enemySprite,200.0,200.0));
 	}
 	catch(Exception e) {e.printStackTrace();}
-	manager = new LevelSwitcher(player, enemy, g);
+	manager = new LevelSwitcher(player, enemies, g);
 	//System.out.println(manager.getPlayer());
     }
 
