@@ -14,6 +14,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 
     private Player player; 
     private Enemy enemy;
+    private ArrayList<Trap> traps;
     private ArrayList<Enemy> enemies;
     private Thread thread; // allows for multiple actions at a time
     private boolean isRunning;
@@ -34,6 +35,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
 
     private void init() {
 	enemies = new ArrayList<Enemy>();
+	traps = new ArrayList<Trap>();
 	image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	g = (Graphics2D) image.getGraphics();
 	isRunning = true;
@@ -48,6 +50,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    enemy = new Enemy(enemySprite,enemySprite,300.0,300.0);
 	    enemies.add(enemy);
 	    enemies.add(new Enemy(enemySprite,enemySprite,200.0,200.0));
+	    traps.add(new Trap("trap.png",15,15,5,0));
+	    traps.add(new Trap("trap.png",15,600,5,0));
 	}
 	catch(Exception e) {e.printStackTrace();}
 	manager = new LevelSwitcher(player, enemies, g);
@@ -90,15 +94,25 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
     
     private void checkDeaths() {
+	boolean eDeath = false;
+	boolean tDeath = false;
 	for (Enemy e : enemies) {
 	    if (Math.abs(e.getX()-(player.getX())) < 10 && Math.abs(e.getY()-(player.getY())) < 10) {
-		player.setXY(1,1);
-		player.setMoveLeft(false);
-		player.setMoveRight(false);
-		player.setMoveUp(false);
-		player.setMoveDown(false);
-		manager.setlevel(3);
+		eDeath = true;
 	    }
+	}
+	for (Trap t : traps) { 
+	    if (Math.abs(t.getX()-(player.getX())) < 10 && Math.abs(t.getY()-(player.getY())) < 10) {
+		tDeath = true;
+	    }
+	}
+	if (eDeath || tDeath) {
+	    player.setXY(1,1);
+	    player.setMoveLeft(false);
+	    player.setMoveRight(false);
+	    player.setMoveUp(false);
+	    player.setMoveDown(false);
+	    manager.setlevel(3);
 	}
     }
 		
@@ -109,6 +123,9 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	for (Enemy e : enemies) { 
 	    e.update();	   
 	}
+	for (Trap t : traps) { 
+	    t.update();
+	}
 	
     }
 		
@@ -118,6 +135,9 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	    player.draw(g);
 	    for (Enemy e : enemies) {
 		e.draw(g);
+	    }
+	    for (Trap t : traps) { 
+		t.draw(g);
 	    }
 	}
     }

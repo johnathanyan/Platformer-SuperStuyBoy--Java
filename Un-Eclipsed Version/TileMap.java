@@ -19,6 +19,7 @@ public class TileMap{
     private int px, py;
     private int[][] pixelated;
     private PrintWriter out;
+    private ArrayList<Trap> traps;
     private ArrayList<Enemy> enemies;
     boolean nextLevel;
 
@@ -242,6 +243,10 @@ public class TileMap{
 		else if(type == 6){
 		    g.drawImage(sprites[2],x,y,null);
 		    solid = false; 
+		}
+		else if(type == 7){
+		    g.drawImage(sprites[2],x,y,null);
+		    solid = true;
 		}
 		if (type!=6) 
 		    tiles[i][j] = new Tile(x, y, tileSize, sprites[sprite],solid);
