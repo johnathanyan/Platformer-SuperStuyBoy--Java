@@ -14,12 +14,15 @@ public class Menu extends Level {
     private Color titleColor;
     private Font titleFont;
     private Font font;
+    private static Sound music;
     private int currentChoice;
     private LevelSwitcher manager;
 
     public Menu (LevelSwitcher manager) {
 	this.manager = manager;
 	currentChoice = 0;
+	music = new Sound("menusong.wav");
+	music.play();
 
 	try{
 	    bg = new Background("/Backgrounds/menu.gif", 1);
@@ -44,6 +47,10 @@ public class Menu extends Level {
 	return bg;
     }
 
+    public Sound getMusic(){
+	return music;
+    }
+
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
 	g.setFont(font);
@@ -63,10 +70,12 @@ public class Menu extends Level {
 	    manager.setlevel(1);
 	    manager.update();
 	    manager.getLevels().get(1).getBackground();
+	    music.stop();
 	    
 	}
 	if (currentChoice == 1){ // credits
 	    manager.setlevel(2);
+	    music.stop();
 	}
 	if (currentChoice == 2){ // quit
 	    System.exit(0);
