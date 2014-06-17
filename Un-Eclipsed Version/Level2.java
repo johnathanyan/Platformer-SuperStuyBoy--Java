@@ -10,11 +10,12 @@ public class Level2 extends Level{
     private TileMap tiles;
     private Graphics2D g;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Trap> traps;
     private ArrayList<Rectangle> boxes;
     private int event = 0;
     private boolean transition;
     
-    public Level2(Player p, ArrayList<Enemy> _e, Graphics2D graphics){
+    public Level2(Player p, ArrayList<Enemy> _e, ArrayList<Trap> _t, Graphics2D graphics){
 	g = graphics;
 	tiles = new TileMap(p,_e,"test2.txt", "spritesheet.png", 32);
 	try{
@@ -24,6 +25,7 @@ public class Level2 extends Level{
 	}
 	player = p;
 	enemies = _e;
+	traps = _t;
 	boxes = new ArrayList<Rectangle>();
     }
   

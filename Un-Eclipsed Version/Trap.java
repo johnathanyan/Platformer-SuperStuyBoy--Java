@@ -40,4 +40,8 @@ public class Trap {
     public double getY() { return y; }
     public void setX(double a) { x = a; }
     public void setY(double a) { y = a; }
+    public void setSpawnX(double a) { spawnX = a; }
+    public void setSpawnY(double a) { spawnY = a; }
+    public void setDX(double a) { dx = a; }
+    public void setDY(double a) { dy = a; } 
 }

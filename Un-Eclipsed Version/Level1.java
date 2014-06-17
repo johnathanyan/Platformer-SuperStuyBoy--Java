@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.*;
 
 public class Level1 extends Level{
+    private ArrayList<Trap> traps;
     private Background bg;
     private Player player;
     private TileMap tiles;
@@ -14,7 +15,7 @@ public class Level1 extends Level{
     private int event = 0;
     private boolean transition;
     
-    public Level1(Player p, ArrayList<Enemy> _e, Graphics2D graphics){
+    public Level1(Player p, ArrayList<Enemy> _e, ArrayList<Trap> _t, Graphics2D graphics){
 	g = graphics;
 	tiles = new TileMap(p,_e,"test.txt", "spritesheet.png", 32);
 	try{
@@ -24,6 +25,7 @@ public class Level1 extends Level{
 	}
 	player = p;
 	enemies = _e;
+	traps = _t;
 	boxes = new ArrayList<Rectangle>();
     }
   
