@@ -120,7 +120,7 @@ public class Enemy{
         
 	if (isJumping) { 
 	    if (startJump){
-		dy = -80; 
+		dy = -20; 
 		startJump = false;
 		isFalling = true;
 	    }	        
@@ -168,7 +168,7 @@ public class Enemy{
 	if ((isJumping || isFalling) && sprite >= 1)
 	    sprite = 0;
 			
-	if (isFalling && y < 600) { dy++; }
+	if (isFalling && y < 600) { dy += 4; }
 	/*else { 
 	  isJumping = false;
 	  dy = 0;

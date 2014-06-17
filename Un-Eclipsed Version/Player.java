@@ -113,79 +113,79 @@ public class Player {
 
     public void update() {
     	long elapsed = (System.nanoTime() - start) / 1000000;
-		if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
-			x += dx;
-			cx += dx;
-			cx1 += dx;
-			cx2 += dx;
-		}
-		dx = 0;
+	if (((dx > 0) && canMoveRight) || ((dx < 0) && canMoveLeft)) {
+	    x += dx;
+	    cx += dx;
+	    cx1 += dx;
+	    cx2 += dx;
+	}
+	dx = 0;
       
         
-		if (isJumping) { 
-			if (startJump){
-				dy = -80; 
-				startJump = false;
-				isFalling = true;
-			}
-			//if (dy<0) {dy+=3;}
-			//if (canMoveUp)
-			//	dy++;
-			//else if(canMoveDown){
-			//	isFalling = true;
-			//	dy--;
-			//}
+	if (isJumping) { 
+	    if (startJump){
+		dy = -20; 
+		startJump = false;
+		isFalling = true;
+	    }
+	    //if (dy<0) {dy+=3;}
+	    //if (canMoveUp)
+	    //	dy++;
+	    //else if(canMoveDown){
+	    //	isFalling = true;
+	    //	dy--;
+	    //}
 	        
-		}
-		if(((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)){        
-		    y += dy;
-		    cy += dy;
-		    cy1 += dy;
-		    cy2 += dy;
-		    if (!isJumping)
-			dy = 0;
+	}
+	if(((dy > 0) && canMoveDown) || ((dy < 0) && canMoveUp)){        
+	    y += dy;
+	    cy += dy;
+	    cy1 += dy;
+	    cy2 += dy;
+	    if (!isJumping)
+		dy = 0;
 		    
-		}
-		if (canMoveDown && !isFalling) // if you're not standing on anything you fall
-			isFalling = true;
+	}
+	if (canMoveDown && !isFalling) // if you're not standing on anything you fall
+	    isFalling = true;
 
-		if (isFalling){ // makes you stop falling when you hit floor
-		    if (!canMoveDown) {
-			isFalling = false;
-			isJumping = false;
+	if (isFalling){ // makes you stop falling when you hit floor
+	    if (!canMoveDown) {
+		isFalling = false;
+		isJumping = false;
+	    }
+	}
+
+	if (left || right){
+	    if (!isJumping || !isFalling){
+		if (sprite >= (runSprites.length / 2)){
+		    if (elapsed > 85){
+			sprite = 0;
+			start = System.nanoTime();
 		    }
 		}
-
-		if (left || right){
-			if (!isJumping || !isFalling){
-				if (sprite >= (runSprites.length / 2)){
-					if (elapsed > 85){
-						sprite = 0;
-						start = System.nanoTime();
-					}
-				}
-				else{
-					if (elapsed > 100){
-						sprite++;
-						start = System.nanoTime();
-					}
-				}
+		else{
+		    if (elapsed > 100){
+			sprite++;
+			start = System.nanoTime();
+		    }
+		}
 				
-			}
-		}	
-				if (!left && !right){
-					if (elapsed > 130)
-						sprite = 0;
-				}
-		if ((isJumping || isFalling) && sprite >= 1)
-			sprite = 0;
-			
-		if (isFalling && y < 600) { dy++; } // makes you fall w gravity
-		/*else { 
-		    isJumping = false;
-		    dy = 0;
-		    }*/
 	    }
+	}	
+	if (!left && !right){
+	    if (elapsed > 130)
+		sprite = 0;
+	}
+	if ((isJumping || isFalling) && sprite >= 1)
+	    sprite = 0;
+			
+	if (isFalling && y < 600) { dy += 4; } // makes you fall w gravity
+	/*else { 
+	  isJumping = false;
+	  dy = 0;
+	  }*/
+    }
     
     public double getX() {return x;}
     public double getY() { return y;}
