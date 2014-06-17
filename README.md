@@ -17,6 +17,11 @@ Log:
 - Hubert (6/7) - TileMap class - reading text file into double array
 - Hubert (6/9) - Changed Player mechanics
 - Hubert (6/10) - Trying to print sprites based on text map file
+- Hubert (6/13) - Added support for a spritesheet, no separate pics for tiles now
+- Hubert (6/14) - Tile class and changes in rendering spritesheet
+- Hubert (6/15) - Pixelator to help detect when player collides with a tile
+- Hubert (6/15) - Collision Detection overhaul, different method from before
+- Hubert (6/16) - Enemy, jumping changes, new sprites
 
 Proposal:
 - A platform style RPG game, similar to Super Meat Boy.
