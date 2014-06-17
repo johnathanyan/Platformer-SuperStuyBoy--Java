@@ -22,6 +22,15 @@ Log:
 - Hubert (6/15) - Pixelator to help detect when player collides with a tile
 - Hubert (6/15) - Collision Detection overhaul, different method from before
 - Hubert (6/16) - Enemy, jumping changes, new sprites
+- Thomas (6/3) - Built off of player skeleton file
+- Thomas (6/9) - Instantiated a player in Game.java, and passed the player alogn the class hierarchy
+- Thomas (6/10) - Polished level switcher, strategically implemented update and draw methods
+- Thomas (6/11) - Displayed the player sprite and map in the window, and implemented basic movement and jump methods
+- Thomas (6/12) - Added background, worked on coordinate based methods and vars in player and level
+- Thomas (6/13) - First attempt at collision detection using coordinate ranges, and instantiated enemies in game.java
+- Thomas (6/14) - Second and third attempts at collision detection using TileMap.java and for loops
+- Thomas (6/16) - Added functional level switching, multiple enemies with basic AI, and player death mechanics
+
 
 Proposal:
 - A platform style RPG game, similar to Super Meat Boy.
