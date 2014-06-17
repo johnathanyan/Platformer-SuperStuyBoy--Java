@@ -14,8 +14,8 @@ public class Player {
     private BufferedImage[] jumpSprites;
     public static double x;
     public static double y;
-    private double dx;
-    private double dy;
+    private static double dx;
+    private static double dy;
     private double cx,cy,cx1,cy1,cx2,cy2;
     //x and y are top left corner, cx,cy are center of sprite
     //cx1,cx2,cy1,cy2 are midpoints of edges of sprite
@@ -217,7 +217,7 @@ public class Player {
     public void setMoveUp(boolean b) { canMoveUp = b; }
     public void setMoveDown(boolean b) { canMoveDown = b; }
     public void setMoveLeft(boolean b) { canMoveLeft = b; }
-    public void setDXDY(double a, double b) {dx = a; dy = b;}
+    public static void setDXDY(double a, double b) {dx = a; dy = b;}
     public void setXY(double a, double b) {
 	x = a;
 	y = b;

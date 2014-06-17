@@ -72,6 +72,8 @@ public class Menu extends Level {
 	    manager.getLevels().get(1).getBackground();
 	    Player.x = 200;
 	    Player.y = 300;
+	    Player.right = false;
+	    Player.left = false;
 	    music.stop();
 	    
 	}
