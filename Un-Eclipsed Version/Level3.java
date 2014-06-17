@@ -4,20 +4,20 @@ import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.util.*;
 
-public class Level1 extends Level{
-    private ArrayList<Trap> traps;
+public class Level3 extends Level{
     private Background bg;
     private Player player;
     private TileMap tiles;
     private Graphics2D g;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Trap> traps;
     private ArrayList<Rectangle> boxes;
     private int event = 0;
     private boolean transition;
     
-    public Level1(Player p, ArrayList<Enemy> _e, ArrayList<Trap> _t, Graphics2D graphics){
+    public Level3(Player p, ArrayList<Enemy> _e, ArrayList<Trap> _t, Graphics2D graphics){
 	g = graphics;
-	tiles = new TileMap(p,_e,"test.txt", "spritesheet.png", 32);
+	tiles = new TileMap(p,_e,"test3.txt", "spritesheet.png", 32);
 	try{
 	    bg = new Background("/Backgrounds/level1.gif", 1);
 	}catch(Exception e){
@@ -40,16 +40,17 @@ public class Level1 extends Level{
 
     public void init(){
 	tiles.drawTiles(g);
+	player.setXY(64.0, 64.0);
 	traps.get(0).setSpawnX(64.0);
 	traps.get(0).setSpawnY(64.0);
-	traps.get(0).setDX(2);
-	traps.get(0).setDY(0);
+	traps.get(0).setDX(3);
+	traps.get(0).setDY(1);
 	traps.get(1).setSpawnX(300.0);
-	traps.get(1).setSpawnY(300.0);
-	traps.get(1).setDX(0);
-	traps.get(1).setDY(2.0);
+	traps.get(1).setSpawnY(400.0);
+	traps.get(1).setDX(4.0);
+	traps.get(1).setDY(4.0);
     }
-    public void update(){
+   public void update(){
 	if (transition = true)
 	    transition();
 	bg.update();
@@ -70,7 +71,6 @@ public class Level1 extends Level{
 	    }
 	}
     }
-
     public void draw(java.awt.Graphics2D g){
 	bg.draw(g);
 	tiles.drawTiles(g);
@@ -99,11 +99,11 @@ public class Level1 extends Level{
     private void select() {
     }
 
-    public void keyPressed(int k){
+  public void keyPressed(int k){
 	if (k == KeyEvent.VK_SPACE) 
 	    player.jump();
 	else if (k == KeyEvent.VK_RIGHT){
-	    //player.move(5,0);
+	    player.move(5,0);
 	    /* if (enemy.right != true){
 	       enemy.start = System.nanoTime();*/
 	    
@@ -114,12 +114,12 @@ public class Level1 extends Level{
 	    player.faceLeft = false;
 	}
 	else if (k == KeyEvent.VK_LEFT) {
-	    //player.move(-5,0);
+	    player.move(-5,0);
 	    //enemy.move(-5,0);
 	    player.left = true;
 	    player.faceLeft = true;
 	} 
-	/*else if (k == KeyEvent.VK_UP) {
+	else if (k == KeyEvent.VK_UP) {
 	    player.move(0,-5);
 	    //enemy.move(0,-5);
 	}
@@ -127,9 +127,7 @@ public class Level1 extends Level{
 	    player.move(0,5);  
 	    //enemy.move(0,5);
  	   }
- 	*/
 	}
-
 
     public void update(int k){}
 

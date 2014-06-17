@@ -21,9 +21,10 @@ public class LevelSwitcher {
 	traps = _t; 
 	levels.add(new Level1(player, enemies, traps, g));
 	levels.add(new Level2(player, enemies, traps, g));
+	levels.add(new Level3(player, enemies, traps, g));
 	levels.add(new Credits(this));
 	currentLevel = MENU;
-    Game.menu = true;
+	Game.menu = true;
 	
     }
     
