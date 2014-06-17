@@ -12,8 +12,8 @@ public class Player {
 
     private BufferedImage[] runSprites;
     private BufferedImage[] jumpSprites;
-    private double x;
-    private double y;
+    public static double x;
+    public static double y;
     private double dx;
     private double dy;
     private double cx,cy,cx1,cy1,cx2,cy2;
@@ -217,6 +217,7 @@ public class Player {
     public void setMoveUp(boolean b) { canMoveUp = b; }
     public void setMoveDown(boolean b) { canMoveDown = b; }
     public void setMoveLeft(boolean b) { canMoveLeft = b; }
+    public void setDXDY(double a, double b) {dx = a; dy = b;}
     public void setXY(double a, double b) {
 	x = a;
 	y = b;

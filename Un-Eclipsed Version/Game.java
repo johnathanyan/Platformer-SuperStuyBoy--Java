@@ -93,6 +93,10 @@ public class Game extends JPanel implements Runnable, KeyListener{
 	for (Enemy e : enemies) {
 	    if (Math.abs(e.getX()-(player.getX())) < 10 && Math.abs(e.getY()-(player.getY())) < 10) {
 		player.setXY(1,1);
+		player.setMoveLeft(false);
+		player.setMoveRight(false);
+		player.setMoveUp(false);
+		player.setMoveDown(false);
 		manager.setlevel(3);
 	    }
 	}
