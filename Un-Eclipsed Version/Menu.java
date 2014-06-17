@@ -79,6 +79,10 @@ public class Menu extends Level {
 	}
 	if (currentChoice == 1){ // credits
 	    manager.setlevel(2);
+	    Player.x = 200;
+	    Player.y = 300;
+	    Player.right = false;
+	    Player.left = false;
 	    music.stop();
 	}
 	if (currentChoice == 2){ // quit
