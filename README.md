@@ -54,5 +54,9 @@ What Doesn't:
 - Collision detection is buggy (we wrote it from scratch)
 
 Instructions:
+- Run SuperStuyBoy.jar
+
+OR
+
 - Run Window.java
 - Use arrow keys to move and space bar to jump.
